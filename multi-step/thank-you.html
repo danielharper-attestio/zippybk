@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager — site-wide (All Pages), so the thank-you page gets the same keyed tracker
+       and can record the post-submit epilogue under the form's certificate. -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-KXJFVS2M');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thanks — TurboDebt test form (Attestio)</title>
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #14181f; background: #f4f6f9; margin: 0; padding: 48px 16px; }
+    .card { max-width: 560px; margin: 0 auto; background: #fff; border-radius: 14px; padding: 36px 32px; text-align: center; box-shadow: 0 8px 30px rgba(15,23,42,.08); }
+    .tick { width: 52px; height: 52px; border-radius: 50%; background: #e7f6ec; color: #1f9d55; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 26px; }
+    h1 { font-size: 22px; margin: 0 0 8px; }
+    p { color: #5b6572; font-size: 14.5px; line-height: 1.6; margin: 0; }
+  </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KXJFVS2M" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
+  <div class="card">
+    <div class="tick">✓</div>
+    <h1>Thanks — submission received.</h1>
+    <p>A debt specialist will review your application and call you shortly.
+       This is the landing page the TurboDebt test form navigates to after submit.</p>
+  </div>
+
+  <!-- Site-wide Attestio install now comes from the GTM container in <head> (All Pages): the keyed
+       tracker detects the post-submit handoff (certificate_id + attestio_epilogue URL params) and
+       records a short EPILOGUE under the same certificate. The old hardcoded
+       attestio.js snippet (placeholder key turbodebt-site) was REMOVED: the tracker resolves
+       its site key and ingest origin from the first matching <script> in the DOM, so a stale tag
+       here made the epilogue post to the wrong origin (HTTP 501 from the :8080 static server) and
+       under a placeholder key. Same hazard for a real customer who leaves an old snippet behind
+       when migrating to GTM — remove the old snippet. -->
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-KXJFVS2M');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apex Auto Insurance — Get your free quote</title>
+  <style>
+    :root{
+      --ink:#12161c; --ink-soft:#48505c; --mute:#7b8492; --line:#e4e7ec; --paper:#fff;
+      --bg:#f5f7fa; --brand:#0b5cff; --brand-dark:#0847c9; --brand-bg:#eaf1ff; --ok:#188a48;
+      --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.5}
+    .topbar{background:var(--paper);border-bottom:1px solid var(--line)}
+    .topbar .in{max-width:920px;margin:0 auto;padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-weight:800;font-size:18px;letter-spacing:-.02em;color:var(--brand)}
+    .logo span{color:var(--ink)}
+    .tag{font-size:12px;color:var(--mute)}
+    .wrap{max-width:920px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:calc(100vh - 57px)}
+    .hero{background:linear-gradient(160deg,var(--brand) 0%,var(--brand-dark) 100%);display:flex;flex-direction:column;justify-content:center;padding:48px 40px;color:#fff}
+    .hero h2{font-size:30px;line-height:1.15;letter-spacing:-.02em;margin-bottom:14px}
+    .hero p{opacity:.9;font-size:15px;max-width:34ch}
+    .hero ul{list-style:none;margin-top:22px;display:grid;gap:10px}
+    .hero li{font-size:14px;opacity:.95;padding-left:24px;position:relative}
+    .hero li::before{content:"✓";position:absolute;left:0;font-weight:700}
+    .formcol{background:var(--paper);padding:40px}
+    .card h1{font-size:24px;letter-spacing:-.01em;margin-bottom:4px}
+    .card .sub{color:var(--ink-soft);font-size:14px;margin-bottom:22px}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .field{margin-bottom:14px}
+    .field label{display:block;font-size:12px;font-weight:600;color:var(--ink-soft);margin-bottom:5px}
+    .field input,.field select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--sans);color:var(--ink);background:var(--paper)}
+    .field input:focus,.field select:focus{outline:none;border-color:var(--brand)}
+    .btn{background:var(--brand);color:#fff;border:1px solid var(--brand);border-radius:8px;padding:12px 18px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--sans);width:100%}
+    .btn:hover{background:var(--brand-dark)}
+    .consent{display:flex;gap:9px;align-items:flex-start;font-size:11.5px;color:var(--mute);line-height:1.5;margin:6px 0 18px}
+    .consent input{margin-top:2px;flex-shrink:0}
+    @media (max-width:760px){.wrap{grid-template-columns:1fr}.hero{display:none}}
+  </style>
+</head>
+<body>
+  <div class="topbar"><div class="in">
+    <span class="logo">Apex<span>Auto</span></span>
+    <span class="tag">Licensed in all 50 states</span>
+  </div></div>
+  <div class="wrap">
+    <div class="hero">
+      <h2>Rates as low as $39/mo.</h2>
+      <p>Drivers who switch to Apex save an average of $612 a year. See your price in under a minute.</p>
+      <ul><li>No effect on your credit</li><li>Compare top carriers</li><li>Real quotes, not estimates</li></ul>
+    </div>
+    <div class="formcol">
+      <div class="card">
+        <h1>Get your free quote</h1>
+        <p class="sub">Tell us a little about you — it won’t affect your credit.</p>
+        <!-- GET navigation so the submit beacon must survive a real page transition -->
+        <form id="app" action="thanks.html" method="get">
+          <div class="row">
+            <div class="field"><label for="full_name">Full name</label><input id="full_name" name="full_name" autocomplete="name" required /></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
+          </div>
+          <div class="row">
+            <div class="field"><label for="date_of_birth">Date of birth</label><input id="date_of_birth" name="date_of_birth" type="date" autocomplete="bday" required /></div>
+            <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel" required /></div>
+          </div>
+          <div class="row">
+            <div class="field"><label for="zip">ZIP code</label><input id="zip" name="zip" inputmode="numeric" maxlength="5" required /></div>
+            <div class="field"><label for="vehicle_year">Vehicle year</label>
+              <select id="vehicle_year" name="vehicle_year" required>
+                <option value="">Select…</option><option>2024</option><option>2023</option><option>2022</option><option>2021</option><option>2020 or older</option>
+              </select>
+            </div>
+          </div>
+          <div class="field"><label for="coverage_type">Coverage type</label>
+            <select id="coverage_type" name="coverage_type" required>
+              <option value="">Select…</option><option>Liability only</option><option>Full coverage</option><option>Not sure</option>
+            </select>
+          </div>
+          <label class="consent">
+            <input type="checkbox" name="consent" required />
+            <span>By checking this box and clicking “See my quote,” I consent to be contacted by Apex Auto
+              Insurance and its partners at the phone number provided, including by autodialed calls and
+              text messages under the Telephone Consumer Protection Act, even if my number is on a Do Not
+              Call list. Consent is not a condition of purchase.</span>
+          </label>
+          <button class="btn" type="submit">See my quote</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KXJFVS2M"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+</body>
+</html>

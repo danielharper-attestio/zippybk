@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager (GTM install test: the container fires the Attestio ?k= tag on All Pages) -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-KXJFVS2M');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TurboDebt (SPA multi-step test) — Debt Relief Application</title>
+  <style>
+    :root {
+      --brand: #0b5f4e; --brand-2: #10b981; --ink: #1a1a1a; --muted: #667085;
+      --line: #e4e7ec; --bg: #f5f7fa; --radius: 12px;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--bg); }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--bg); color: var(--ink); margin: 0; padding: 40px 16px;
+      min-height: 100vh; box-sizing: border-box;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+    }
+    .card {
+      width: 100%; max-width: 40rem; background: #fff; border: 1px solid var(--line);
+      border-radius: 16px; box-shadow: 0 8px 30px rgba(16,24,40,.06); padding: 32px;
+    }
+    header .brand { font-size: 1.6rem; font-weight: 800; color: var(--brand); letter-spacing: -.02em; }
+    header .tagline { color: var(--muted); margin-top: 4px; font-size: .95rem; }
+
+    /* Setup gate */
+    .setup h2 { margin: 22px 0 6px; font-size: 1.25rem; }
+    .setup p.lead { color: var(--muted); margin: 0 0 16px; font-size: .95rem; line-height: 1.5; }
+    .setup textarea {
+      width: 100%; min-height: 84px; padding: 12px 14px; font-family: ui-monospace, Menlo, monospace;
+      font-size: 16px; border: 1px solid var(--line); border-radius: var(--radius); resize: vertical;
+      background: #0b1220; color: #dbe4f0;
+    }
+    .setup textarea::placeholder { color: #6b7891; }
+    .hintline { font-size: 12.5px; color: var(--muted); margin: 8px 0 18px; }
+    .hintline a { color: var(--brand); }
+    .error { color: #d92d20; font-size: .9rem; margin-top: 10px; min-height: 1.1em; }
+    .ok-badge {
+      display: inline-flex; align-items: center; gap: 6px; background: #e7f7f0; color: var(--brand);
+      border: 1px solid #b6e6d4; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600;
+    }
+
+    .progress { display: flex; gap: 6px; margin: 4px 0 24px; }
+    .progress span { flex: 1; height: 5px; background: #e2e2e2; border-radius: 3px; transition: background .2s; }
+    .progress span.done { background: var(--brand-2); }
+
+    .step { display: none; }
+    .step.active { display: block; animation: fade .2s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+    .step h2 { margin: 0 0 4px; font-size: 1.3rem; }
+    .step p.hint { color: var(--muted); margin: 0 0 4px; }
+
+    .options { display: grid; gap: 10px; margin-top: 18px; }
+    .option-btn {
+      display: block; width: 100%; text-align: left; padding: 14px 16px; font-size: 1rem; font-weight: 600;
+      border: 2px solid var(--line); border-radius: var(--radius); background: #fff; cursor: pointer; transition: all .12s;
+    }
+    .option-btn:hover { border-color: var(--brand-2); background: #f6fefb; }
+    .option-btn input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+    .option-btn:has(input:checked) { border-color: var(--brand); background: #eafaf5; }
+
+    label { display: block; margin-top: 18px; font-weight: 600; font-size: .95rem; }
+    input[type="text"], input[type="email"], input[type="tel"], select {
+      width: 100%; padding: 12px 14px; margin-top: 6px; font-size: 1rem;
+      border: 1px solid var(--line); border-radius: var(--radius); outline: none;
+    }
+    input:focus, select:focus { border-color: var(--brand-2); box-shadow: 0 0 0 3px rgba(16,185,129,.12); }
+
+    .consent { margin-top: 22px; padding: 16px; border: 1px solid var(--line); background: #fafbfc; border-radius: var(--radius); }
+    .consent p { font-size: 12.5px; line-height: 1.5; color: var(--muted); margin: 0 0 10px; }
+    .consent label { display: flex; gap: 10px; font-weight: normal; align-items: flex-start; margin: 0; font-size: .9rem; }
+
+    .nav-buttons { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; }
+    button.primary, button.next, button.start {
+      padding: 12px 22px; font-size: 1rem; font-weight: 600; cursor: pointer;
+      background: var(--brand); color: #fff; border: none; border-radius: 999px; transition: background .12s;
+    }
+    button.primary:hover, button.next:hover, button.start:hover { background: #094c3f; }
+    button.start { width: 100%; margin-top: 4px; }
+    button.back { padding: 12px 18px; font-size: 1rem; cursor: pointer; background: transparent; color: var(--muted); border: none; }
+    #status { margin-top: 16px; font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); white-space: pre-wrap; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KXJFVS2M" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
+  <div class="card">
+    <header>
+      <div class="brand">TurboDebt</div>
+      <div class="tagline">See if you qualify for debt relief — takes about 2 minutes. (Test fixture: 4-step single-page form; the tracker is installed ONLY via Google Tag Manager — no snippet in this HTML.)</div>
+    </header>
+
+
+    <!-- FORM (tracker installed via GTM only) -->
+    <div id="formWrap">
+      <div style="margin-bottom:18px"><span class="ok-badge" id="trackingBadge">● Tracking active</span></div>
+
+      <div class="progress" id="progress">
+        <span class="done"></span><span></span><span></span><span></span><span></span>
+      </div>
+
+      <form id="leadForm" action="thank-you.html">
+        <div class="step active" data-step="1">
+          <h2>What's your estimated debt balance?</h2>
+          <p class="hint">Include credit cards, medical bills, and personal loans.</p>
+          <div class="options" data-field="debt_amount">
+            <label class="option-btn"><input type="radio" name="debt_amount" value="lt_5k" required /> Under $5,000</label>
+            <label class="option-btn"><input type="radio" name="debt_amount" value="5k_10k" /> $5,000 - $10,000</label>
+            <label class="option-btn"><input type="radio" name="debt_amount" value="10k_25k" /> $10,000 - $25,000</label>
+            <label class="option-btn"><input type="radio" name="debt_amount" value="25k_50k" /> $25,000 - $50,000</label>
+            <label class="option-btn"><input type="radio" name="debt_amount" value="over_50k" /> $50,000+</label>
+          </div>
+        </div>
+
+        <div class="step" data-step="2">
+          <h2>What type of debt do you have?</h2>
+          <p class="hint">Select the option that makes up most of your balance.</p>
+          <div class="options" data-field="debt_type">
+            <label class="option-btn"><input type="radio" name="debt_type" value="credit_cards" required /> Credit cards</label>
+            <label class="option-btn"><input type="radio" name="debt_type" value="medical_bills" /> Medical bills</label>
+            <label class="option-btn"><input type="radio" name="debt_type" value="personal_loans" /> Personal loans</label>
+            <label class="option-btn"><input type="radio" name="debt_type" value="other" /> Other</label>
+          </div>
+          <div class="nav-buttons"><button type="button" class="back" data-back>Back</button></div>
+        </div>
+
+        <div class="step" data-step="3">
+          <h2>Employment details</h2>
+          <label for="employment">Employment status</label>
+          <select id="employment" name="employment">
+            <option value="full_time" selected>Employed full-time</option>
+            <option value="self_employed">Self-employed</option>
+            <option value="part_time">Part-time</option>
+            <option value="unemployed">Unemployed</option>
+          </select>
+          <label for="income">Annual income</label>
+          <select id="income" name="income">
+            <option value="lt25k">Less than $25,000</option>
+            <option value="25k-40k">$25,000 - $40,000</option>
+            <option value="40k-60k" selected>$40,000 - $60,000</option>
+            <option value="60k+">$60,000+</option>
+          </select>
+          <label for="state">State</label>
+          <input id="state" name="state" type="text" autocomplete="address-level1" placeholder="e.g. FL" required />
+          <div class="nav-buttons">
+            <button type="button" class="back" data-back>Back</button>
+            <button type="button" class="next" data-next>Continue</button>
+          </div>
+        </div>
+
+        <div class="step" data-step="4">
+          <h2>Where should we send your savings estimate?</h2>
+          <label for="fullName">Full name</label>
+          <input id="fullName" name="full_name" type="text" autocomplete="name" required />
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" required />
+          <div class="nav-buttons">
+            <button type="button" class="back" data-back>Back</button>
+            <button type="button" class="next" data-next>Continue</button>
+          </div>
+        </div>
+
+        <div class="step" data-step="5">
+          <h2>Review and submit</h2>
+          <div class="consent">
+            <p>
+              By submitting this form, you consent to be contacted by phone, text message, or email by
+              TurboDebt and its network of licensed representatives, which may include the use of an
+              autodialer, prerecorded or artificial voice, regarding your inquiry, even if your number
+              is on a Do Not Call list. Message and data rates may apply. Reply STOP to opt out at any
+              time. Consent is not a condition of purchase. This request and your electronic signature
+              also constitute your written instruction under the Fair Credit Reporting Act (FCRA)
+              authorizing us to obtain your credit information. This disclosure is provided pursuant to
+              the Telephone Consumer Protection Act (TCPA).
+            </p>
+            <label>
+              <input type="checkbox" id="consentCheckbox" name="consent" required />
+              I have read and agree to the consent language above.
+            </label>
+          </div>
+          <div class="nav-buttons">
+            <button type="button" class="back" data-back>Back</button>
+            <button type="submit" class="primary">See my savings estimate</button>
+          </div>
+        </div>
+      </form>
+
+      <div id="status"></div>
+    </div>
+  </div>
+
+  <script>
+
+    // ---- Multi-step navigation ----
+    const steps = Array.from(document.querySelectorAll('.step'));
+    const progressEls = Array.from(document.querySelectorAll('#progress span'));
+    let currentStep = 1;
+    function showStep(n) {
+      steps.forEach((el) => el.classList.toggle('active', Number(el.dataset.step) === n));
+      progressEls.forEach((el, i) => el.classList.toggle('done', i < n));
+      currentStep = n;
+    }
+    function goNext() { if (currentStep < steps.length) showStep(currentStep + 1); }
+    document.querySelectorAll('[data-next]').forEach((b) => b.addEventListener('click', goNext));
+    document.querySelectorAll('[data-back]').forEach((b) => b.addEventListener('click', () => { if (currentStep > 1) showStep(currentStep - 1); }));
+    document.querySelectorAll('.options input[type="radio"]').forEach((r) => r.addEventListener('change', goNext));
+  </script>
+</body>
+</html>
