@@ -1,0 +1,7 @@
+<svg width="180" height="34" viewBox="0 0 180 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M17 2 L30 9 V19 C30 26 24 31 17 33 C10 31 4 26 4 19 V9 Z" fill="#2f6fed"/>
+  <path d="M17 2 L30 9 V19 C30 26 24 31 17 33 Z" fill="#1e4fbf"/>
+  <path d="M12 12 h3 v4 l4 -4 h4 l-5 5 5 6 h-4 l-4 -5 v5 h-3 z" fill="#ffffff"/>
+  <text x="40" y="15" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800" fill="#1f3a5f">Keystone</text>
+  <text x="40" y="29" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="600" fill="#2f6fed" letter-spacing="0.12em">RELIEF</text>
+</svg>

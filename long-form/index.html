@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KXJFVS2M');</script>
+<!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keystone Relief — See If You Qualify for Debt Relief</title>
+  <link rel="stylesheet" href="keystone.css" />
+</head>
+<body>
+<!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KXJFVS2M" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
+  <!-- The branded funnel (revealed after Start) -->
+  <div id="page">
+    <div class="topbar"><div class="in">
+      <img class="logo" src="img/logo.svg" alt="Keystone Relief" />
+      <div class="phone">
+        <span class="ph-label">Speak with a certified debt specialist</span>
+        <a class="ph-num" href="#">1-855-0-KEYSTONE</a>
+      </div>
+    </div></div>
+
+    <div class="wrap">
+      <div class="card">
+        <div class="progress"><div id="bar" class="bar"></div></div>
+        <a class="back" id="backBtn" href="#" style="display:none">&larr; Back</a>
+
+        <!-- Real single-page-app funnel: each question screen is CREATED in the DOM as the visitor
+             advances (matching how production debt-relief funnels work). Answers accumulate as
+             hidden inputs in #answers so the final submit carries the whole journey. -->
+        <form id="app" novalidate>
+          <div id="answers"></div>
+          <div id="screen"></div>
+        </form>
+      </div>
+
+      <!-- Guided assistant (mirrors the real form's "Catherine" persona: photo + per-step tip). -->
+      <div class="assistant" id="assistant">
+        <div class="av">K</div>
+        <div class="bubble">
+          <strong>Katie</strong>
+          <span id="tip">Hi there! I'm Katie — I'll help you find your personalized debt-relief estimate.</span>
+        </div>
+      </div>
+
+      <p class="foot-note">Keystone Relief is a demo brand. This form is a test page for Attestio
+         session recording — modeled on real debt-relief comparison funnels.</p>
+    </div>
+
+    <footer class="legal-foot">
+      <img class="legal-logo" src="img/logo.svg" alt="Keystone Relief" />
+      <p>This website is owned and operated by Keystone Relief (keystonerelief.example). By
+         registering for access to any portion of this website or by using any portion of this
+         website, you agree to be bound by these terms and conditions. Please review our other
+         policies, such as our privacy policy. These policies also govern your use of this website.
+         If you do not agree to be bound by these terms and conditions, do not proceed any further
+         and do not use this website.</p>
+      <p>By completing the form above, I am providing &ldquo;written instructions&rdquo; to Keystone
+         Relief authorizing it to obtain my credit profile from any consumer reporting agency, which
+         can be used to evaluate my financial history and provide me with targeted offers based on my
+         credit profile. We may receive a referral fee or other affiliate fee for connecting you with
+         these third-party companies or upon you contracting with a third-party company. The order in
+         which options are presented may be impacted by that compensation.</p>
+      <p class="copyright">&copy; 2026 Keystone Relief</p>
+      <nav class="legal-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms &amp; Conditions</a>
+        <a href="#">Do Not Sell My Personal Information</a>
+      </nav>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      // Tracker is installed via GTM (no paste gate). Boot the funnel on load.
+
+      // ---- The funnel app ----
+      var form = document.getElementById("app");
+      var screen = document.getElementById("screen");
+      var answers = document.getElementById("answers");
+      var bar = document.getElementById("bar");
+      var backBtn = document.getElementById("backBtn");
+      var tip = document.getElementById("tip");
+      var stepIndex = 0;
+
+      function money(n) { return "$" + Number(n).toLocaleString("en-US"); }
+
+      // Exact First Advantage flow, one screen each:
+      //  amount(slider) → $20k+ balances → monthly income → employment → name → email → DOB →
+      //  mailing address → phone + TCPA/FCRA consent (SEE RESULTS) → thank-you.
+      var STEPS = [
+        {
+          title: "How much debt do you have?",
+          tip: "Include credit cards, personal loans, medical bills, and collections — not mortgages or auto loans.",
+          render: function (c) {
+            var wrap = document.createElement("div"); wrap.className = "slider-wrap";
+            var val = document.createElement("div"); val.className = "slider-val"; val.id = "sval";
+            var input = document.createElement("input");
+            input.type = "range"; input.name = "debt_balance"; input.id = "debt_balance";
+            input.min = "5000"; input.max = "100000"; input.step = "500"; input.value = "20000";
+            input.required = true;
+            var ends = document.createElement("div"); ends.className = "slider-ends";
+            ends.innerHTML = "<span>$5,000</span><span>$100,000+</span>";
+            var update = function () {
+              var n = Number(input.value);
+              val.textContent = n >= 100000 ? "$100,000+" : money(n);
+            };
+            input.addEventListener("input", update);
+            wrap.appendChild(val); wrap.appendChild(input); wrap.appendChild(ends);
+            c.appendChild(wrap);
+            update();
+          },
+          next: "Next →"
+        },
+        {
+          title: "Do you have $20,000 or more in combined balances?",
+          tip: "Programs work best for $20,000+ in unsecured debt, but we can still review lower balances.",
+          choices: { name: "over_20k", options: ["Yes", "No"] }
+        },
+        {
+          title: "What is your approximate monthly income?",
+          tip: "Calculate your available gross income including wages, retirement, investments, and rental properties.",
+          choices: { name: "monthly_income", options: ["$5000+", "$4000 - $5000", "$3000 - $4000", "$2000 - $3000", "$1000 - $2000", "I don't have monthly income"] }
+        },
+        {
+          title: "What's your employment status?",
+          tip: "This helps us match you to the right program and a realistic monthly plan.",
+          choices: { name: "employment_status", options: ["Employed full-time", "Employed part-time", "Self-employed", "Retired", "Unemployed"] }
+        },
+        {
+          title: "What's your name?",
+          tip: "Your specialist will use this to prepare your personalized estimate.",
+          render: function (c) {
+            var r = row();
+            r.appendChild(field("first_name", "First name", { autocomplete: "given-name" }));
+            r.appendChild(field("last_name", "Last name", { autocomplete: "family-name" }));
+            c.appendChild(r);
+          },
+          next: "Continue →"
+        },
+        {
+          // Personalized with the entered first name, like the real form ("What's your email, {name}?").
+          title: "What's your email?",
+          tip: "We'll send your estimate here. We never sell your email.",
+          personalize: true,
+          render: function (c) {
+            c.appendChild(field("email", "Email address", { type: "email", autocomplete: "email" }));
+          },
+          next: "Continue →"
+        },
+        {
+          title: "What's your date of birth?",
+          tip: "Lenders require your date of birth to verify your identity. It's masked in your session record.",
+          render: function (c) {
+            c.appendChild(field("date_of_birth", "Date of birth", { type: "date", autocomplete: "bday" }));
+          },
+          next: "Continue →"
+        },
+        {
+          title: "What's your mailing address?",
+          tip: "Program availability and your dedicated specialist depend on your state.",
+          render: function (c) {
+            c.appendChild(field("address", "Street address", { autocomplete: "street-address" }));
+            var r = row();
+            r.appendChild(field("city", "City", { autocomplete: "address-level2" }));
+            r.appendChild(field("state", "State", { autocomplete: "address-level1", maxlength: 2, placeholder: "e.g. FL" }));
+            c.appendChild(r);
+            c.appendChild(field("zip", "ZIP code", { inputmode: "numeric", maxlength: 5, autocomplete: "postal-code" }));
+          },
+          next: "Continue →"
+        },
+        {
+          title: "And finally, what's your phone number?",
+          tip: "A certified specialist will call with your free, no-obligation estimate.",
+          render: function (c) {
+            c.appendChild(field("phone", "Phone number", { type: "tel", autocomplete: "tel" }));
+            var p = document.createElement("p");
+            p.className = "consent";
+            p.textContent = 'By clicking "See Results" and submitting my form, I provide my electronic ' +
+              "signature and express written consent to receive marketing calls and text messages from " +
+              "Keystone Relief and its debt-relief partners at the number provided, including via an " +
+              "automatic telephone dialing system or artificial or prerecorded voice, even if my number " +
+              "is on a Do Not Call list. Consent is not a condition of purchase. Message and data rates " +
+              "may apply. I also provide express written consent under the Fair Credit Reporting Act for " +
+              "Keystone Relief to obtain my credit report for a soft credit check, which will not affect " +
+              "my credit score, to evaluate me for debt-relief options. I accept the Terms of Use and the " +
+              "Privacy Policy.";
+            c.appendChild(p);
+          },
+          next: "See Results",
+          submit: true
+        }
+      ];
+
+      function field(name, label, attrs) {
+        var w = document.createElement("div"); w.className = "field";
+        var l = document.createElement("label"); l.setAttribute("for", name); l.textContent = label;
+        var i = document.createElement("input"); i.id = name; i.name = name; i.required = true;
+        for (var k in (attrs || {})) { if (k === "type") i.type = attrs[k]; else i.setAttribute(k, attrs[k]); }
+        w.appendChild(l); w.appendChild(i);
+        return w;
+      }
+      function row() { var r = document.createElement("div"); r.className = "row"; return r; }
+
+      function renderStep() {
+        var step = STEPS[stepIndex];
+        screen.innerHTML = "";
+        bar.style.width = Math.round(((stepIndex + 1) / STEPS.length) * 100) + "%";
+        backBtn.style.display = stepIndex > 0 ? "inline-block" : "none";
+        tip.textContent = step.tip || "";
+
+        var h = document.createElement("h1");
+        var title = step.title;
+        if (step.personalize) {
+          var fn = (answers.querySelector('input[name="first_name"]') || {}).value;
+          if (fn) title = "What's your email, " + fn + "?";
+        }
+        h.textContent = title; screen.appendChild(h);
+        if (step.sub) { var s = document.createElement("p"); s.className = "sub"; s.textContent = step.sub; screen.appendChild(s); }
+
+        if (step.choices) {
+          var grid = document.createElement("div"); grid.className = "choices";
+          step.choices.options.forEach(function (opt) {
+            var lab = document.createElement("label"); lab.className = "choice";
+            var r = document.createElement("input"); r.type = "radio"; r.name = step.choices.name; r.value = opt;
+            var t = document.createElement("span"); t.textContent = opt;
+            lab.appendChild(r); lab.appendChild(t);
+            r.addEventListener("change", function () { setTimeout(advance, 220); });
+            grid.appendChild(lab);
+          });
+          screen.appendChild(grid);
+        } else if (step.render) {
+          step.render(screen);
+        }
+
+        var nav = document.createElement("div"); nav.className = "nav";
+        if (!step.choices) {
+          var btn = document.createElement("button"); btn.className = "btn";
+          btn.type = step.submit ? "submit" : "button";
+          btn.textContent = step.next || "Continue →";
+          if (!step.submit) btn.addEventListener("click", advance);
+          nav.appendChild(btn);
+        }
+        screen.appendChild(nav);
+
+        var first = screen.querySelector("input:not([type=radio]):not([type=range])");
+        if (first) first.focus();
+      }
+
+      // Bank the screen's answers as hidden inputs, then mount the next screen. Sensitive values
+      // (DOB) ride along too — Attestio masks them by field name on every path.
+      function advance() {
+        var inputs = screen.querySelectorAll("input");
+        for (var i = 0; i < inputs.length; i++) {
+          var el = inputs[i];
+          if (el.type === "radio" && !el.checked) continue;
+          if (!el.value) { if (el.required && el.type !== "range") { el.classList.add("bad"); return; } }
+          var hidden = answers.querySelector('input[name="' + el.name + '"]');
+          if (!hidden) {
+            hidden = document.createElement("input");
+            hidden.type = "hidden"; hidden.name = el.name;
+            answers.appendChild(hidden);
+          }
+          hidden.setAttribute("value", el.value);
+        }
+        if (stepIndex < STEPS.length - 1) { stepIndex++; renderStep(); }
+      }
+
+      backBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (stepIndex > 0) { stepIndex--; renderStep(); }
+      });
+
+      form.addEventListener("submit", function (e) {
+        // A real submit event (so the tracker certifies the lead); navigation is done by the app
+        // itself — like production funnels — so no field values ever land in the URL.
+        e.preventDefault();
+        var phone = screen.querySelector('input[name="phone"]');
+        if (phone && !phone.value) { phone.classList.add("bad"); return; }
+        advance();
+        setTimeout(function () { window.location.href = "thanks.html"; }, 300);
+      });
+
+      function boot() { stepIndex = 0; renderStep(); }
+      boot();
+    })();
+  </script>
+</body>
+</html>
