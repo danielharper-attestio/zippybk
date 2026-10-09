@@ -53,6 +53,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <!-- Step 1 is a REAL form: Continue submits with method=get to submit/, so the browser
          navigates (the URL changes) and the step-1 answers travel to step 2 as query params. -->
     <form id="gettingStartedForm" method="get" action="submit/">
+      <!-- Carried through the funnel so GTM's `qp - DebtOwed` trigger matches on every page.
+           Populated from this page's own ?DebtOwed= on load (removed if absent, so no blank key). -->
+      <input type="hidden" name="DebtOwed" id="qp_debtowed" />
       <h2>What's your estimated debt balance?</h2>
       <p class="hint">Include credit cards, medical bills, and personal loans.</p>
       <div class="options" data-field="debt_amount">
@@ -79,7 +82,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <button type="submit" class="next">Continue</button>
       </div>
     </form>
+
+    <!-- Two "forms" = the same funnel entered with each DebtOwed value; GTM fires Tag A vs Tag B. -->
+    <p style="margin-top:18px;font-size:12.5px;color:#667085">
+      Test entries —
+      <a href="?DebtOwed=15000"><strong>Form A</strong> · ?DebtOwed=15000</a> ·
+      <a href="?DebtOwed=25000"><strong>Form B</strong> · ?DebtOwed=25000</a>
+    </p>
   </div>
+
+  <script>
+    // Propagate ?DebtOwed= into the Continue (GET) navigation. If it isn't present, drop the hidden
+    // field entirely so the next URL doesn't carry a blank DebtOwed= key.
+    (function () {
+      var v = new URLSearchParams(location.search).get('DebtOwed');
+      var h = document.getElementById('qp_debtowed');
+      if (v) { h.value = v; } else { h.remove(); }
+    })();
+  </script>
 
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJZ933NB"

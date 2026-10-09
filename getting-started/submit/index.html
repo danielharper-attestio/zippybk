@@ -61,6 +61,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <input type="hidden" name="debt_amount" id="h_debt_amount" />
       <input type="hidden" name="debt_type" id="h_debt_type" />
       <input type="hidden" name="state" id="h_state" />
+      <input type="hidden" name="DebtOwed" id="h_debtowed" />
 
       <label class="fld" for="fullName">Full name</label>
       <input id="fullName" name="full_name" type="text" autocomplete="name" required />
@@ -97,12 +98,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     // Re-attach the step-1 answers that arrived in the URL query string, and show a short recap.
     (function () {
       var q = new URLSearchParams(location.search);
-      var map = { debt_amount: 'h_debt_amount', debt_type: 'h_debt_type', state: 'h_state' };
+      var map = { debt_amount: 'h_debt_amount', debt_type: 'h_debt_type', state: 'h_state', DebtOwed: 'h_debtowed' };
       var parts = [];
       Object.keys(map).forEach(function (k) {
         var v = q.get(k);
         if (v != null) { document.getElementById(map[k]).value = v; parts.push(k.replace('_', ' ') + ': <strong>' + v + '</strong>'); }
       });
+      // Drop any mapped hidden field left empty so the final submit doesn't carry blank keys.
+      Object.keys(map).forEach(function (k) { var el = document.getElementById(map[k]); if (el && !el.value) el.remove(); });
       if (parts.length) { var r = document.getElementById('recap'); r.innerHTML = 'From step 1 — ' + parts.join(' · '); r.hidden = false; }
     })();
   </script>
