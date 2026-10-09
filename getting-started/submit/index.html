@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TurboDebt (multi-page test) — Getting started · submit</title>
+  <style>
+    :root { --brand:#0b5f4e; --brand-2:#10b981; --ink:#1a1a1a; --muted:#667085; --line:#e4e7ec; --bg:#f5f7fa; --radius:12px; }
+    * { box-sizing:border-box; }
+    html { background:var(--bg); }
+    body { font-family:system-ui,-apple-system,"Segoe UI",sans-serif; background:var(--bg); color:var(--ink); margin:0; padding:40px 16px; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; }
+    .card { width:100%; max-width:40rem; background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:0 8px 30px rgba(16,24,40,.06); padding:32px; }
+    header .brand { font-size:1.6rem; font-weight:800; color:var(--brand); letter-spacing:-.02em; }
+    header .tagline { color:var(--muted); margin-top:4px; font-size:.95rem; line-height:1.5; }
+    .ok-badge { display:inline-flex; align-items:center; gap:6px; background:#e7f7f0; color:var(--brand); border:1px solid #b6e6d4; padding:6px 12px; border-radius:999px; font-size:13px; font-weight:600; }
+    .progress { display:flex; gap:6px; margin:4px 0 20px; }
+    .progress span { flex:1; height:5px; background:#e2e2e2; border-radius:3px; }
+    .progress span.done { background:var(--brand-2); }
+    h2 { margin:0 0 4px; font-size:1.3rem; }
+    p.hint { color:var(--muted); margin:0 0 4px; font-size:.95rem; }
+    .recap { margin:14px 0 4px; padding:12px 14px; border:1px solid var(--line); background:#fafbfc; border-radius:var(--radius); font-size:13px; color:var(--muted); }
+    .recap strong { color:var(--ink); }
+    label.fld { display:block; margin-top:18px; font-weight:600; font-size:.95rem; }
+    input[type="text"], input[type="email"], input[type="tel"] { width:100%; padding:12px 14px; margin-top:6px; font-size:1rem; border:1px solid var(--line); border-radius:var(--radius); outline:none; }
+    input:focus { border-color:var(--brand-2); box-shadow:0 0 0 3px rgba(16,185,129,.12); }
+    .consent { margin-top:22px; padding:16px; border:1px solid var(--line); background:#fafbfc; border-radius:var(--radius); }
+    .consent p { font-size:12.5px; line-height:1.5; color:var(--muted); margin:0 0 10px; }
+    .consent label { display:flex; gap:10px; font-weight:normal; align-items:flex-start; margin:0; font-size:.9rem; }
+    .nav-buttons { display:flex; justify-content:space-between; align-items:center; margin-top:24px; }
+    button.primary { padding:12px 22px; font-size:1rem; font-weight:600; cursor:pointer; background:var(--brand); color:#fff; border:none; border-radius:999px; transition:background .12s; }
+    button.primary:hover { background:#094c3f; }
+    a.back { padding:12px 18px; font-size:1rem; color:var(--muted); text-decoration:none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <header>
+      <div class="brand">TurboDebt</div>
+      <div class="tagline">Almost done. <strong>(Step 2 of the multi-page test — this is a separate URL, /getting-started/submit. Your step-1 answers arrived in the query string.)</strong></div>
+    </header>
+
+    <div style="margin:18px 0"><span class="ok-badge">● Tracking active · Step 2 of 2</span></div>
+
+    <div class="progress"><span class="done"></span><span class="done"></span></div>
+
+    <h2>Where should we send your savings estimate?</h2>
+    <p class="hint">A debt specialist will review your details and reach out.</p>
+
+    <div class="recap" id="recap" hidden></div>
+
+    <!-- Final submit navigates to the thank-you page (another URL change) with the full funnel data. -->
+    <form id="submitForm" method="get" action="../thank-you.html">
+      <!-- Step-1 answers, re-attached from the query string so the final submission carries them. -->
+      <input type="hidden" name="debt_amount" id="h_debt_amount" />
+      <input type="hidden" name="debt_type" id="h_debt_type" />
+      <input type="hidden" name="state" id="h_state" />
+
+      <label class="fld" for="fullName">Full name</label>
+      <input id="fullName" name="full_name" type="text" autocomplete="name" required />
+      <label class="fld" for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" required />
+      <label class="fld" for="phone">Phone</label>
+      <input id="phone" name="phone" type="tel" autocomplete="tel" required />
+
+      <div class="consent">
+        <p>
+          By submitting this form, you consent to be contacted by phone, text message, or email by
+          TurboDebt and its network of licensed representatives, which may include the use of an
+          autodialer, prerecorded or artificial voice, regarding your inquiry, even if your number
+          is on a Do Not Call list. Message and data rates may apply. Reply STOP to opt out at any
+          time. Consent is not a condition of purchase. This request and your electronic signature
+          also constitute your written instruction under the Fair Credit Reporting Act (FCRA)
+          authorizing us to obtain your credit information. This disclosure is provided pursuant to
+          the Telephone Consumer Protection Act (TCPA).
+        </p>
+        <label>
+          <input type="checkbox" id="consentCheckbox" name="consent" required />
+          I have read and agree to the consent language above.
+        </label>
+      </div>
+
+      <div class="nav-buttons">
+        <a class="back" href="../">Back</a>
+        <button type="submit" class="primary">See my savings estimate</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Re-attach the step-1 answers that arrived in the URL query string, and show a short recap.
+    (function () {
+      var q = new URLSearchParams(location.search);
+      var map = { debt_amount: 'h_debt_amount', debt_type: 'h_debt_type', state: 'h_state' };
+      var parts = [];
+      Object.keys(map).forEach(function (k) {
+        var v = q.get(k);
+        if (v != null) { document.getElementById(map[k]).value = v; parts.push(k.replace('_', ' ') + ': <strong>' + v + '</strong>'); }
+      });
+      if (parts.length) { var r = document.getElementById('recap'); r.innerHTML = 'From step 1 — ' + parts.join(' · '); r.hidden = false; }
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TurboDebt (multi-page test) — Getting started</title>
+  <style>
+    :root { --brand:#0b5f4e; --brand-2:#10b981; --ink:#1a1a1a; --muted:#667085; --line:#e4e7ec; --bg:#f5f7fa; --radius:12px; }
+    * { box-sizing:border-box; }
+    html { background:var(--bg); }
+    body { font-family:system-ui,-apple-system,"Segoe UI",sans-serif; background:var(--bg); color:var(--ink); margin:0; padding:40px 16px; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; }
+    .card { width:100%; max-width:40rem; background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:0 8px 30px rgba(16,24,40,.06); padding:32px; }
+    header .brand { font-size:1.6rem; font-weight:800; color:var(--brand); letter-spacing:-.02em; }
+    header .tagline { color:var(--muted); margin-top:4px; font-size:.95rem; line-height:1.5; }
+    .ok-badge { display:inline-flex; align-items:center; gap:6px; background:#e7f7f0; color:var(--brand); border:1px solid #b6e6d4; padding:6px 12px; border-radius:999px; font-size:13px; font-weight:600; }
+    .progress { display:flex; gap:6px; margin:4px 0 24px; }
+    .progress span { flex:1; height:5px; background:#e2e2e2; border-radius:3px; }
+    .progress span.done { background:var(--brand-2); }
+    h2 { margin:0 0 4px; font-size:1.3rem; }
+    p.hint { color:var(--muted); margin:0 0 4px; font-size:.95rem; }
+    .options { display:grid; gap:10px; margin-top:18px; }
+    .option-btn { display:block; width:100%; text-align:left; padding:14px 16px; font-size:1rem; font-weight:600; border:2px solid var(--line); border-radius:var(--radius); background:#fff; cursor:pointer; transition:all .12s; }
+    .option-btn:hover { border-color:var(--brand-2); background:#f6fefb; }
+    .option-btn input[type="radio"] { position:absolute; opacity:0; pointer-events:none; }
+    .option-btn:has(input:checked) { border-color:var(--brand); background:#eafaf5; }
+    label.fld { display:block; margin-top:18px; font-weight:600; font-size:.95rem; }
+    input[type="text"], select { width:100%; padding:12px 14px; margin-top:6px; font-size:1rem; border:1px solid var(--line); border-radius:var(--radius); outline:none; }
+    input:focus, select:focus { border-color:var(--brand-2); box-shadow:0 0 0 3px rgba(16,185,129,.12); }
+    .nav-buttons { display:flex; justify-content:flex-end; align-items:center; margin-top:24px; }
+    button.next { padding:12px 22px; font-size:1rem; font-weight:600; cursor:pointer; background:var(--brand); color:#fff; border:none; border-radius:999px; transition:background .12s; }
+    button.next:hover { background:#094c3f; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <header>
+      <div class="brand">TurboDebt</div>
+      <div class="tagline">See if you qualify for debt relief — takes about 2 minutes. <strong>(Test fixture: MULTI-PAGE form — clicking Continue navigates to a new URL, /getting-started/submit. Tracker installed via Google Tag Manager only.)</strong></div>
+    </header>
+
+    <div style="margin:18px 0"><span class="ok-badge" id="trackingBadge">● Tracking active · Step 1 of 2</span></div>
+
+    <div class="progress"><span class="done"></span><span></span></div>
+
+    <!-- Step 1 is a REAL form: Continue submits with method=get to submit/, so the browser
+         navigates (the URL changes) and the step-1 answers travel to step 2 as query params. -->
+    <form id="gettingStartedForm" method="get" action="submit/">
+      <h2>What's your estimated debt balance?</h2>
+      <p class="hint">Include credit cards, medical bills, and personal loans.</p>
+      <div class="options" data-field="debt_amount">
+        <label class="option-btn"><input type="radio" name="debt_amount" value="lt_5k" required /> Under $5,000</label>
+        <label class="option-btn"><input type="radio" name="debt_amount" value="5k_10k" /> $5,000 - $10,000</label>
+        <label class="option-btn"><input type="radio" name="debt_amount" value="10k_25k" /> $10,000 - $25,000</label>
+        <label class="option-btn"><input type="radio" name="debt_amount" value="25k_50k" /> $25,000 - $50,000</label>
+        <label class="option-btn"><input type="radio" name="debt_amount" value="over_50k" /> $50,000+</label>
+      </div>
+
+      <h2 style="margin-top:26px">What type of debt do you have?</h2>
+      <p class="hint">Select the option that makes up most of your balance.</p>
+      <div class="options" data-field="debt_type">
+        <label class="option-btn"><input type="radio" name="debt_type" value="credit_cards" required /> Credit cards</label>
+        <label class="option-btn"><input type="radio" name="debt_type" value="medical_bills" /> Medical bills</label>
+        <label class="option-btn"><input type="radio" name="debt_type" value="personal_loans" /> Personal loans</label>
+        <label class="option-btn"><input type="radio" name="debt_type" value="other" /> Other</label>
+      </div>
+
+      <label class="fld" for="state">State</label>
+      <input id="state" name="state" type="text" autocomplete="address-level1" placeholder="e.g. FL" required />
+
+      <div class="nav-buttons">
+        <button type="submit" class="next">Continue</button>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>
