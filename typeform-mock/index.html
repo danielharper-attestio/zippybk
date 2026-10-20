@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZippyBK — Typeform-style eligibility check</title>
+  <!--
+    Typeform renderer replica (2026-10-10). Mirrors the DOM Typeform's hosted renderer produces:
+    NO <form> element anywhere; one question per [data-qa^="blocktype-…"] block with a
+    [data-qa^="block-title"]; picture choices are <button data-qa="choice"> wrapping <img alt>;
+    contact questions are bare inputs (name="email" type="email", name="phone_number" type="tel");
+    only the current and next blocks stay in the DOM; Submit sends the answers by XHR and swaps in a
+    thank-you screen whose data-qa carries the "-visible" suffix while on screen.
+    Purpose: prove the tracker's Typeform submit detector on a real domain through GTM before it is
+    relied on for Typeform-hosted partners. The Attestio tag is injected by GTM (trigger: Page Path
+    starts with /typeform-mock/), nothing is pasted here.
+  -->
+  <style>
+    :root { --ink: #191919; --accent: #4a3aff; }
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; background: #fff; color: var(--ink); }
+    [data-qa="renderer"] { max-width: 720px; margin: 72px auto; padding: 0 24px; }
+    [data-qa="progress-track"] { height: 4px; background: #eee; border-radius: 2px; margin-bottom: 40px; }
+    [data-qa="progress-fill"] { height: 4px; background: var(--accent); border-radius: 2px; transition: width .3s; }
+    [data-qa^="blocktype-"] { margin-bottom: 48px; }
+    [data-qa^="block-title"] { font-size: 24px; font-weight: 500; margin: 0 0 18px; }
+    [data-qa="block-description"] { color: #555; margin: -8px 0 16px; }
+    [role="radiogroup"] { display: flex; gap: 12px; flex-wrap: wrap; }
+    button[data-qa="choice"] { border: 1px solid #d4d4e0; background: #f5f5f8; padding: 18px 16px; min-width: 150px; cursor: pointer; border-radius: 6px; font: inherit; color: var(--ink); text-align: center; }
+    button[data-qa="choice"] b { display: block; font-size: 16px; letter-spacing: .5px; }
+    button[data-qa="choice"][aria-checked="true"] { border-color: var(--accent); background: #ecebff; }
+    input { font: inherit; font-size: 22px; padding: 8px 2px; border: 0; border-bottom: 2px solid var(--accent); outline: none; width: 100%; max-width: 440px; background: transparent; }
+    .ok, .submit { margin-top: 18px; background: var(--accent); color: #fff; border: 0; padding: 10px 20px; font-size: 16px; border-radius: 4px; cursor: pointer; font: inherit; }
+    .legal { font-size: 13px; line-height: 1.5; color: #555; margin-top: 24px; max-width: 580px; }
+    .hidden { display: none; }
+    .combobox-trigger { font: inherit; font-size: 18px; padding: 10px 14px; border: 1px solid #d4d4e0; background: #fff; cursor: pointer; border-radius: 6px; min-width: 300px; text-align: left; }
+    .combobox-list { list-style: none; padding: 0; margin: 6px 0; border: 1px solid #ddd; max-width: 440px; border-radius: 6px; }
+    .combobox-list li { padding: 10px 14px; cursor: pointer; }
+    .combobox-list li:hover { background: #f5f5f8; }
+    [data-qa^="thank-you-screen"] h1 { font-size: 28px; }
+  </style>
+</head>
+<body>
+
+<div data-qa="renderer">
+  <div data-qa="progress-track"><div data-qa="progress-fill" style="width: 0%"></div></div>
+
+  <section data-qa="blocktype-picture_choice deep-purple-blocktype-picture_choice" data-step="1">
+    <h1 data-qa="block-title deep-purple-block-title">How much credit card debt do you have at this time?*</h1>
+    <div role="radiogroup">
+      <button type="button" data-qa="choice" role="radio" aria-checked="false" aria-label="Option A"><img alt="Under 10,000" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="1" height="1"><b>UNDER $10,000</b></button>
+      <button type="button" data-qa="choice" role="radio" aria-checked="false" aria-label="Option B"><img alt="Over 25,000" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="1" height="1"><b>OVER $25,000</b></button>
+      <button type="button" data-qa="choice" role="radio" aria-checked="false" aria-label="Option C"><img alt="Between 10,000 and 25,000" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="1" height="1"><b>BETWEEN</b></button>
+    </div>
+    <button type="button" class="ok" data-qa="ok-button-visible deep-purple-ok-button-visible">OK</button>
+  </section>
+
+  <section data-qa="blocktype-picture_choice deep-purple-blocktype-picture_choice" data-step="2" class="hidden">
+    <h1 data-qa="block-title deep-purple-block-title">Are you currently paying on your debt?*</h1>
+    <div role="radiogroup">
+      <button type="button" data-qa="choice" role="radio" aria-checked="false" aria-label="Option A"><img alt="No" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="1" height="1"><b>No</b></button>
+      <button type="button" data-qa="choice" role="radio" aria-checked="false" aria-label="Option B"><img alt="Yes" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="1" height="1"><b>Yes</b></button>
+      <button type="button" data-qa="choice" role="radio" aria-checked="false" aria-label="Option C"><img alt="Sometimes" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="1" height="1"><b>Sometimes</b></button>
+    </div>
+    <button type="button" class="ok" data-qa="ok-button-visible deep-purple-ok-button-visible">OK</button>
+  </section>
+
+  <section data-qa="blocktype-dropdown deep-purple-blocktype-dropdown" data-step="3" class="hidden">
+    <label data-qa="block-title deep-purple-block-title">What is your state of residence?*</label>
+    <div data-qa="block-description">(If your state isn't listed, pick the nearest one.)</div>
+    <button type="button" data-qa="combobox-trigger" class="combobox-trigger">Type or select an option</button>
+    <ul class="combobox-list hidden" role="listbox">
+      <li data-qa="combobox-item" role="option">Alabama</li>
+      <li data-qa="combobox-item" role="option">California</li>
+      <li data-qa="combobox-item" role="option">Florida</li>
+      <li data-qa="combobox-item" role="option">New York</li>
+      <li data-qa="combobox-item" role="option">Texas</li>
+    </ul>
+    <button type="button" class="ok" data-qa="ok-button-visible deep-purple-ok-button-visible">OK</button>
+  </section>
+
+  <section data-qa="blocktype-short_text deep-purple-blocktype-short_text" data-step="4" class="hidden">
+    <h1 data-qa="block-title deep-purple-block-title">What is your full name?*</h1>
+    <input type="text" name="full_name" autocomplete="name" placeholder="Type your answer here...">
+    <button type="button" class="ok" data-qa="ok-button-visible deep-purple-ok-button-visible">OK</button>
+  </section>
+
+  <section data-qa="blocktype-email deep-purple-blocktype-email" data-step="5" class="hidden">
+    <h1 data-qa="block-title deep-purple-block-title">What is your email address?*</h1>
+    <input type="email" name="email" autocomplete="email" placeholder="name@example.com">
+    <button type="button" class="ok" data-qa="ok-button-visible deep-purple-ok-button-visible">OK</button>
+  </section>
+
+  <section data-qa="blocktype-phone_number deep-purple-blocktype-phone_number" data-step="6" class="hidden">
+    <h1 data-qa="block-title deep-purple-block-title">And your phone number?*</h1>
+    <div data-qa="block-description">A specialist will call you about your options.</div>
+    <input type="tel" name="phone_number" autocomplete="tel" placeholder="(201) 555-0123">
+    <p class="legal">By clicking Submit, I agree to be contacted by ZippyBK and its partners at the number provided,
+      including by autodialed and prerecorded calls and text messages, even if my number is on a Do Not Call list.
+      Consent is not a condition of purchase. Message and data rates may apply. I have read and agree to the
+      Privacy Policy and TCPA disclosure.</p>
+    <button type="button" class="submit" data-qa="submit-button deep-purple-submit-button">Submit</button>
+  </section>
+
+  <div id="thankyou" class="hidden"></div>
+</div>
+
+<script>
+  // Renderer behaviour, minimal: choice click selects (aria-checked) and auto-advances after a beat,
+  // OK advances, Submit "posts" and renders the thank-you screen. Earlier blocks are REMOVED from the
+  // DOM on advance, like Typeform (only current + next are kept).
+  (function () {
+    var steps = Array.prototype.slice.call(document.querySelectorAll('[data-step]'));
+    var current = 0;
+    function show(i) {
+      steps.forEach(function (s, idx) {
+        if (idx < i - 1 && s.parentNode) s.parentNode.removeChild(s);
+        s.classList.toggle('hidden', idx !== i);
+      });
+      document.querySelector('[data-qa="progress-fill"]').style.width = Math.round((i / steps.length) * 100) + '%';
+      var input = steps[i] && steps[i].querySelector('input');
+      if (input) setTimeout(function () { input.focus(); }, 50);
+    }
+    function advance() { current += 1; if (current < steps.length) show(current); }
+    document.addEventListener('click', function (ev) {
+      var choice = ev.target.closest('button[data-qa="choice"]');
+      if (choice) {
+        choice.parentNode.querySelectorAll('button[data-qa="choice"]').forEach(function (b) { b.setAttribute('aria-checked', 'false'); });
+        choice.setAttribute('aria-checked', 'true');
+        setTimeout(advance, 400);
+        return;
+      }
+      if (ev.target.closest('.combobox-trigger')) { ev.target.closest('section').querySelector('.combobox-list').classList.toggle('hidden'); return; }
+      var item = ev.target.closest('[data-qa="combobox-item"]');
+      if (item) {
+        var sec = item.closest('section');
+        sec.querySelector('.combobox-trigger').textContent = item.textContent;
+        sec.querySelector('.combobox-list').classList.add('hidden');
+        return;
+      }
+      if (ev.target.closest('.ok')) { advance(); return; }
+      if (ev.target.closest('.submit')) {
+        try { fetch('/forms/ZIPPYTF1/complete-submission', { method: 'POST', body: '{}' }).catch(function () {}); } catch (e) {}
+        setTimeout(function () {
+          steps.forEach(function (s) { if (s.parentNode) s.parentNode.removeChild(s); });
+          var ty = document.getElementById('thankyou');
+          ty.className = '';
+          ty.setAttribute('data-qa', 'thank-you-screen-visible deep-purple-thank-you-screen');
+          ty.innerHTML = '<h1 data-qa="thank-you-screen-title">Thanks! A ZippyBK specialist will call you shortly.</h1>';
+          document.cookie = 'form-submitted-ZIPPYTF1=' + Date.now() + '; path=/';
+        }, 300);
+      }
+    }, true);
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key !== 'Enter') return;
+      var s = steps[current];
+      if (!s || !s.contains(ev.target)) return;
+      var btn = s.querySelector('.submit') || s.querySelector('.ok');
+      if (btn) btn.click();
+    });
+    show(0);
+  })();
+</script>
+</body>
+</html>
