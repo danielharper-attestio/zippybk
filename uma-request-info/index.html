@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ultimate Medical Academy – Request Information (Demo)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+<!-- ===================================================================
+     ATTESTIO: place the Attestio capture script here.
+     <script src="..." async></script>
+     =================================================================== -->
+
+<style>
+  :root {
+    --navy: #1a2b47;
+    --mint: #5fe2c1;
+    --mint-hover: #4fd3b2;
+    --ink: #1a2b47;
+    --label: #3f4652;
+    --field-border: #c6cad1;
+    --field-focus: #1a2b47;
+    --consent: #3a3f47;
+    --error: #c62828;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--navy);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Demo notice ---------- */
+  .demo-bar { background:#000; color:#fff; font-size:12px; text-align:center; padding:4px 12px; }
+
+  /* ---------- Header ---------- */
+  header { background:#fff; height:64px; }
+  .topbar {
+    max-width: 1200px; height: 100%; margin: 0 auto; padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo-slot { display:flex; align-items:center; height:48px; text-decoration:none; }
+  .logo-slot img { height:46px; width:auto; display:block; }
+  .logo-placeholder {
+    height:46px; padding:0 12px; display:flex; align-items:center;
+    border:1px dashed #9aa3b2; color:#5b6475; font-size:12px; border-radius:2px;
+  }
+  nav.main { display:flex; gap:34px; }
+  nav.main a {
+    color: var(--ink); text-decoration:none; font-size:18px; font-weight:400;
+    display:flex; align-items:center; gap:4px;
+  }
+  nav.main a svg { width:14px; height:14px; }
+  .header-actions { display:flex; align-items:center; gap:18px; }
+  .btn-get-started {
+    background: var(--mint); color: var(--ink); font-weight:700; font-size:18px;
+    padding: 12px 32px; border-radius: 999px; text-decoration:none;
+  }
+  .btn-get-started:hover { background: var(--mint-hover); }
+  .icon-btn {
+    width:38px; height:38px; border-radius:50%; border:0; background:#f1f2f4;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--ink);
+  }
+  .menu-btn { display:none; background:none; border:0; padding:4px; cursor:pointer; color:var(--ink); }
+
+  /* ---------- RFI section ---------- */
+  .rfi {
+    max-width: 1200px; margin: 0 auto; padding: 60px 40px 70px;
+    display: grid; grid-template-columns: 1fr 576px; gap: 32px; align-items: center;
+  }
+  .rfi-copy { color:#fff; }
+  .rfi-copy h2 { font-size:38px; font-weight:500; margin:0 0 22px; line-height:1.15; }
+  .rfi-copy h3 {
+    font-size:22px; font-weight:500; margin:0; padding-bottom:20px;
+    border-bottom: 2px solid var(--mint);
+  }
+  .rfi-copy p { font-size:18px; line-height:1.55; margin:20px 0 0; max-width:560px; }
+
+  .form-card { background:#fff; border-radius:14px; padding:40px 32px 40px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .full { grid-column: 1 / -1; }
+
+  /* Floating-label fields */
+  .field { position:relative; }
+  .field input, .field select {
+    width:100%; height:54px; font: 400 15px/1 "Roboto", Arial, sans-serif; color:var(--ink);
+    border:1px solid var(--field-border); border-radius:6px; background:#fff;
+    padding: 20px 15px 6px; outline:none; appearance:none; -webkit-appearance:none;
+  }
+  .field select { padding-right:40px; cursor:pointer; }
+  .field label {
+    position:absolute; left:16px; top:50%; transform:translateY(-50%);
+    font-size:14px; font-weight:500; color:var(--label); pointer-events:none;
+    transition: top .15s, font-size .15s, transform .15s;
+  }
+  .field input:focus + label,
+  .field input:not(:placeholder-shown) + label,
+  .field.has-value label,
+  .field select:focus + label {
+    top:9px; transform:none; font-size:11px;
+  }
+  .field input:focus, .field select:focus { border-color: var(--field-focus); box-shadow: 0 0 0 1px var(--field-focus); }
+  .field .chev {
+    position:absolute; right:16px; top:50%; transform:translateY(-50%);
+    width:16px; height:16px; pointer-events:none; color:var(--ink);
+  }
+  .field.invalid input, .field.invalid select { border-color: var(--error); }
+  .err { color:var(--error); font-size:12px; margin-top:4px; }
+  .err:empty { display:none; }
+
+  .consent {
+    margin:18px 0 18px; font-size:11.5px; line-height:1.42; color:var(--consent);
+  }
+  .submit {
+    width:100%; height:60px; border:0; border-radius:999px; cursor:pointer;
+    background: var(--mint); color: var(--ink); font: 700 18px "Roboto", Arial, sans-serif;
+  }
+  .submit:hover { background: var(--mint-hover); }
+  .submit:focus-visible, .btn-get-started:focus-visible, nav.main a:focus-visible {
+    outline:3px solid var(--navy); outline-offset:2px;
+  }
+
+  .success { display:none; text-align:center; padding:40px 0; }
+  .success h2 { font-size:28px; font-weight:500; margin:0 0 12px; }
+  .form-card.done form { display:none; }
+  .form-card.done .success { display:block; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1100px) {
+    nav.main { gap:20px; }
+    nav.main a { font-size:16px; }
+    .rfi { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 900px) {
+    nav.main, .icon-btn { display:none; }
+    .menu-btn { display:block; }
+    .topbar { padding: 0 16px; }
+    .btn-get-started { font-size:16px; padding:10px 18px; }
+    .rfi { grid-template-columns: 1fr; padding: 16px 16px 40px; gap:32px; }
+    .form-card { order:-1; padding:40px 16px 22px; border-radius:14px; }
+    .grid { grid-template-columns: 1fr; gap:16px; }
+    .field input, .field select { height:50px; }
+    .rfi-copy h2 { font-size:30px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-bar">Demo form for Attestio testing · Not affiliated with Ultimate Medical Academy</div>
+
+<header>
+  <div class="topbar">
+    <a class="logo-slot" href="#" aria-label="Ultimate Medical Academy home">
+      <!-- LOGO: replace the placeholder with the UMA logo file you're authorized to use, e.g.
+           <img src="/assets/uma/uma-logo.png" alt="Ultimate Medical Academy"> -->
+      <span class="logo-placeholder">Logo</span>
+    </a>
+
+    <nav class="main" aria-label="Main">
+      <a href="#">Programs <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3.5 6l4.5 4.5L12.5 6"/></svg></a>
+      <a href="#">Admissions <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3.5 6l4.5 4.5L12.5 6"/></svg></a>
+      <a href="#">Why UMA <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3.5 6l4.5 4.5L12.5 6"/></svg></a>
+      <a href="#">Locations <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3.5 6l4.5 4.5L12.5 6"/></svg></a>
+      <a href="#">About Us <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3.5 6l4.5 4.5L12.5 6"/></svg></a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn-get-started" href="#uma-rfi-form">Get Started</a>
+      <button class="icon-btn" type="button" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20" stroke-linecap="round"/></svg>
+      </button>
+      <button class="menu-btn" type="button" aria-label="Menu">
+        <svg width="30" height="30" viewBox="0 0 30 30" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M4 7h22M4 15h22M4 23h22"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="rfi">
+  <div class="rfi-copy">
+    <h2>Request Information</h2>
+    <h3>Talk with us. Start your journey.</h3>
+    <p>Complete this form and we'll call you to answer any questions. We'll also email you info on how to get started.</p>
+  </div>
+
+  <div class="form-card" id="formCard">
+    <form id="uma-rfi-form" name="uma-rfi-form" data-vertical="education" data-brand="ultimate-medical-academy">
+      <div class="grid">
+        <div class="field">
+          <input type="text" id="first_name" name="first_name" autocomplete="given-name" placeholder=" " required pattern=".*\S.*" title="Enter your first name.">
+          <label for="first_name">First Name *</label>
+          <div class="err" aria-live="polite"></div>
+        </div>
+        <div class="field">
+          <input type="text" id="last_name" name="last_name" autocomplete="family-name" placeholder=" " required pattern=".*\S.*" title="Enter your last name.">
+          <label for="last_name">Last Name *</label>
+          <div class="err" aria-live="polite"></div>
+        </div>
+        <div class="field">
+          <input type="tel" id="phone" name="phone" autocomplete="tel-national" inputmode="tel" maxlength="14" placeholder=" " required pattern="\(\d{3}\) \d{3}-\d{4}" title="Enter a 10-digit phone number.">
+          <label for="phone">Phone Number *</label>
+          <div class="err" aria-live="polite"></div>
+        </div>
+        <div class="field">
+          <select id="state" name="state" autocomplete="address-level1" required>
+            <option value="" selected hidden></option>
+            <option value="AL">Alabama</option><option value="AK">Alaska</option>
+            <option value="AZ">Arizona</option><option value="AR">Arkansas</option>
+            <option value="CA">California</option><option value="DE">Delaware</option>
+            <option value="FL">Florida</option><option value="GA">Georgia</option>
+            <option value="GU">Guam</option><option value="HI">Hawaii</option>
+            <option value="ID">Idaho</option><option value="IL">Illinois</option>
+            <option value="IN">Indiana</option><option value="IA">Iowa</option>
+            <option value="KS">Kansas</option><option value="KY">Kentucky</option>
+            <option value="LA">Louisiana</option><option value="ME">Maine</option>
+            <option value="MD">Maryland</option><option value="MI">Michigan</option>
+            <option value="MN">Minnesota</option><option value="MO">Missouri</option>
+            <option value="MT">Montana</option><option value="NE">Nebraska</option>
+            <option value="NV">Nevada</option><option value="NH">New Hampshire</option>
+            <option value="NJ">New Jersey</option><option value="NM">New Mexico</option>
+            <option value="NC">North Carolina</option><option value="OH">Ohio</option>
+            <option value="OK">Oklahoma</option><option value="OR">Oregon</option>
+            <option value="PA">Pennsylvania</option><option value="SC">South Carolina</option>
+            <option value="SD">South Dakota</option><option value="TN">Tennessee</option>
+            <option value="TX">Texas</option><option value="UT">Utah</option>
+            <option value="VT">Vermont</option><option value="VA">Virginia</option>
+            <option value="VI">Virgin Islands</option><option value="WA">Washington</option>
+            <option value="WV">West Virginia</option><option value="WI">Wisconsin</option>
+            <option value="WY">Wyoming</option>
+          </select>
+          <label for="state">State or Territory *</label>
+          <svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3.5 6l4.5 4.5L12.5 6"/></svg>
+          <div class="err" aria-live="polite"></div>
+        </div>
+        <div class="field full">
+          <input type="email" id="email" name="email" autocomplete="email" placeholder=" " required pattern="[^\s@]+@[^\s@]+\.[^\s@]{2,}" title="Enter a valid email address.">
+          <label for="email">Email *</label>
+          <div class="err" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <!-- CONSENT LANGUAGE: replace with UMA's exact live disclosure before testing. -->
+      <p class="consent" id="consent-language" data-consent="tcpa">
+        By clicking the Request Info button below, I am providing my eSIGN signature and my express written consent for Ultimate Medical Academy (UMA), and parties calling on its behalf, to contact me by phone call or text message at the number provided above about educational opportunities with UMA, including calls made with automatic telephone dialing technology. I confirm I am authorized to consent for this phone number. I agree to receive these calls and texts even if my number is on a do-not-call list now or in the future. I understand my consent is not a condition of enrollment and that I may revoke it at any time. I understand calls may be recorded.
+      </p>
+
+      <input type="hidden" name="attestio_token" id="attestio_token" value="">
+      <input type="hidden" name="page_url" id="page_url" value="">
+      <input type="hidden" name="consent_text" id="consent_text" value="">
+
+      <button type="submit" class="submit" id="request-info-btn">Request Info</button>
+    </form>
+
+    <div class="success" role="status" aria-live="polite">
+      <h2>Thanks, <span id="successName"></span>!</h2>
+      <p>Your request was sent. An admissions representative will call you soon, and we'll email you details on how to get started.</p>
+    </div>
+  </div>
+</main>
+
+<script>
+(function () {
+  const form = document.getElementById('uma-rfi-form');
+  const phone = document.getElementById('phone');
+  const state = document.getElementById('state');
+  document.getElementById('page_url').value = location.href;
+
+  phone.addEventListener('input', () => {
+    const d = phone.value.replace(/\D/g, '').slice(0, 10);
+    let out = d;
+    if (d.length > 6) out = `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`;
+    else if (d.length > 3) out = `(${d.slice(0,3)}) ${d.slice(3)}`;
+    else if (d.length > 0) out = `(${d}`;
+    phone.value = out;
+  });
+
+  state.addEventListener('change', () =>
+    state.closest('.field').classList.toggle('has-value', !!state.value));
+
+  const rules = {
+    first_name: v => v.trim() ? '' : 'Enter your first name.',
+    last_name:  v => v.trim() ? '' : 'Enter your last name.',
+    phone:      v => v.replace(/\D/g, '').length === 10 ? '' : 'Enter a 10-digit phone number.',
+    state:      v => v ? '' : 'Select your state or territory.',
+    email:      v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? '' : 'Enter a valid email address.'
+  };
+  function check(el) {
+    const msg = rules[el.name](el.value);
+    const f = el.closest('.field');
+    f.classList.toggle('invalid', !!msg);
+    f.querySelector('.err').textContent = msg;
+    el.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    return !msg;
+  }
+  Object.keys(rules).forEach(n => form.elements[n].addEventListener('blur', () => check(form.elements[n])));
+  // The browser now blocks an incomplete submit (so no empty record is created); refresh every field's red message on each click.
+  document.getElementById('request-info-btn').addEventListener('click', () => Object.keys(rules).forEach(n => check(form.elements[n])));
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    let firstBad = null;
+    Object.keys(rules).forEach(n => { const el = form.elements[n]; if (!check(el) && !firstBad) firstBad = el; });
+    if (firstBad) { firstBad.focus(); return; }
+
+    document.getElementById('consent_text').value =
+      document.getElementById('consent-language').innerText.trim();
+    const payload = Object.fromEntries(new FormData(form).entries());
+    payload.submitted_at = new Date().toISOString();
+
+    // ATTESTIO: send / certify the lead here
+    console.log('UMA demo submission', payload);
+
+    document.getElementById('successName').textContent = payload.first_name.trim();
+    document.getElementById('formCard').classList.add('done');
+  });
+})();
+</script>
+</body>
+</html>
