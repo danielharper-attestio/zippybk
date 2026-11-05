@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo 2 — The page says no</title>
+<link rel="stylesheet" href="demo.css">
+<script src="demo.js"></script>
+<script>Demo.loadTracker('dev'); Demo.stampSubmitTime();</script>
+</head>
+<body>
+<header class="bar"><a href="/">← Demos</a><span class="badge" id="rid">Record ID: waiting for our server…</span></header>
+<main>
+  <h1>Demo 2 — The page says no</h1>
+  <p class="lead">This page checks the answers itself, like many client sites do: the phone number must have 10 digits.</p>
+  <ol class="steps">
+    <li>Fill the form with a phone number of only 9 digits (e.g. <code>512555014</code>) and press Submit. The page shows
+      an error and stays.</li>
+    <li>Watch the status box: about 5 seconds later the tracker reports that the page turned the submit down — so it is
+      <strong>not</strong> a lead. It appears only under Failed submissions, as "Not submitted".</li>
+    <li>Fix the phone number and submit again: now the page accepts it, and it becomes a lead with the <em>same</em>
+      record ID.</li>
+  </ol>
+  <p class="note">A broken email (like <code>john@example</code>) is turned down too — by our server's own email check,
+  even before the page's answer matters.</p>
+  <div class="card">
+    <form id="lead" action="done.html" method="get" novalidate>
+      <input type="hidden" name="demo" value="email-check">
+      <label for="full_name">Full name</label>
+      <input type="text" id="full_name" name="full_name" autocomplete="off">
+      <label for="email">Email</label>
+      <input type="text" id="email" name="email" autocomplete="off">
+      <div class="error" id="email-error">Please enter a valid email address.</div>
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" name="phone" autocomplete="off">
+      <div class="error" id="phone-error">Please enter a 10-digit phone number.</div>
+      <p class="consent">By clicking Submit you agree that we may contact you by phone and text message, including by
+        autodialer, at the number provided. Consent is not a condition of purchase.</p>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <div class="card result" id="status" style="display:none"></div>
+</main>
+<script>
+  Demo.watchRecordId();
+  const form = document.getElementById('lead');
+  const error = document.getElementById('email-error');
+  const phoneError = document.getElementById('phone-error');
+  const box = document.getElementById('status');
+  let polling = null;
+  // The page's own check (bubble phase, like a client's script): a broken email or a short phone keeps the visitor here.
+  form.addEventListener('submit', (e) => {
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('email').value.trim());
+    const phoneOk = document.getElementById('phone').value.replace(/\D/g, '').length === 10;
+    error.style.display = emailOk ? 'none' : 'block';
+    phoneError.style.display = phoneOk ? 'none' : 'block';
+    const ok = emailOk && phoneOk;
+    if (ok) return;
+    e.preventDefault();
+    form.querySelector('input[name="demo_t"]')?.remove(); // the next try gets its own submit time
+    const id = Demo.currentId();
+    box.style.display = 'block';
+    box.innerHTML = '<p class="wait">Submit turned down by the page. Waiting for the tracker\'s report (about 5 s)…</p>';
+    clearInterval(polling);
+    const started = Date.now();
+    polling = setInterval(async () => {
+      const s = await fetch(`/demo-api/status?id=${encodeURIComponent(id)}`).then((r) => r.json()).catch(() => null);
+      if (!s) return;
+      const done = s.verdict === 'rejected' && !s.pending;
+      box.innerHTML = `<dl>
+        <dt>Record ID</dt><dd class="mono">${Demo.esc(id)}</dd>
+        <dt>Page's answer</dt><dd>${s.verdict === 'rejected' ? '<span class="no">Turned down</span>' : s.verdict === 'accepted' ? '<span class="yes">Accepted</span>' : '<span class="wait">waiting…</span>'}</dd>
+        <dt>A lead?</dt><dd>${s.lead ? '<span class="yes">Yes</span>' : '<span class="no">No</span>'}${s.pending ? ' (saved as pending — not a lead until the page accepts it)' : ''}</dd>
+        <dt>Failed submissions</dt><dd>${s.failure ? `Listed: <em>${Demo.esc(s.failure)}</em>` : '—'}</dd>
+      </dl>${done ? '<p class="note">Now fix it and press Submit again.</p>' : ''}`;
+      if (done || Date.now() - started > 15000) clearInterval(polling);
+    }, 1000);
+  });
+</script>
+</body>
+</html>

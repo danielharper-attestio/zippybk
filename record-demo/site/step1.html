@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo 3 — Step 1 of 2</title>
+<link rel="stylesheet" href="demo.css">
+<script src="demo.js"></script>
+<script>Demo.loadTracker('dev2'); Demo.stampSubmitTime();</script>
+</head>
+<body>
+<header class="bar"><a href="/">← Demos</a><span class="badge" id="rid">Record ID: waiting for our server…</span></header>
+<main>
+  <h1>Demo 3 — Step 1 of 2</h1>
+  <p class="lead">A two-page form like TurboDebt's: the page handles "Continue" with its own code ("Submitting…", then it
+  moves on). Facebook's and Instagram's in-app browsers can wipe everything a site stored between these two pages — with
+  the box ticked, step 2 starts that way.</p>
+  <div class="card">
+    <form id="s1" action="step2.html" method="get">
+      <label for="debt_amount">How much debt do you have?</label>
+      <select id="debt_amount" name="debt_amount">
+        <option value="">Choose…</option>
+        <option value="10k_25k">$10,000 – $25,000</option>
+        <option value="25k_50k">$25,000 – $50,000</option>
+        <option value="50k_plus">$50,000 or more</option>
+      </select>
+      <label for="zip">ZIP code</label>
+      <input type="text" id="zip" name="zip" autocomplete="off">
+      <label class="check"><input type="checkbox" id="wipe" checked> Simulate the Facebook / Instagram browser wiping
+        everything this site stored before step 2</label>
+      <button type="submit" id="next">Continue</button>
+    </form>
+  </div>
+  <p class="note">Ran this demo in the last 15 minutes in this browser? Then step 2 gets its own record — our safety rule
+  (two recent journeys from one browser: we don't guess). Wait 15 minutes or use another browser.</p>
+</main>
+<script>
+  Demo.watchRecordId();
+  // The page's own "Continue" (like TurboDebt's): "Submitting…", then it moves on with its own code — the next
+  // page's address carries nothing of ours. (s1 = this page's record ID, only so step 2 can show it next to its own.)
+  document.getElementById('s1').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('next');
+    btn.textContent = 'Submitting…';
+    btn.disabled = true;
+    const q = new URLSearchParams({ s1: Demo.currentId() });
+    if (document.getElementById('wipe').checked) q.set('wipe', '1');
+    setTimeout(() => location.assign(`step2.html?${q}`), 400);
+  });
+</script>
+</body>
+</html>

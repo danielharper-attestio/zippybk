@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo 4 — Sent by the page's own code</title>
+<link rel="stylesheet" href="demo.css">
+<script src="demo.js"></script>
+<script>Demo.loadTracker('dev');</script>
+</head>
+<body>
+<header class="bar"><a href="/">← Demos</a><span class="badge" id="rid">Record ID: waiting for our server…</span></header>
+<main>
+  <h1>Demo 4 — Sent by the page's own code</h1>
+  <p class="lead">Some sites never submit a form at all: a "Send" button runs the site's own script, which posts the
+  answers to its server and swaps the form for a thank-you message on the same page. There is no submit for a tracker to
+  see — ours still notices the send, keeps a copy of the answers taken at the click, and makes the lead once the page
+  shows it went through.</p>
+  <div class="card" id="box">
+    <form id="crm">
+      <label for="full_name">Full name</label>
+      <input type="text" id="full_name" name="full_name" autocomplete="off">
+      <label for="email">Email</label>
+      <input type="text" id="email" name="email" autocomplete="off">
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" name="phone" autocomplete="off">
+      <p class="consent">By clicking Send you agree that we may contact you by phone and text message, including by
+        autodialer, at the number provided. Consent is not a condition of purchase.</p>
+      <button type="button" id="send">Send</button>
+    </form>
+  </div>
+  <div class="card result" id="result" style="display:none"></div>
+</main>
+<script>
+  Demo.watchRecordId();
+  document.getElementById('send').addEventListener('click', async () => {
+    const clickedAt = Date.now();
+    const id = Demo.currentId(); // the ID the site would send along (its hidden attestio_record_id field)
+    const values = Object.fromEntries(new FormData(document.getElementById('crm')));
+    const btn = document.getElementById('send');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    await fetch('/demo-api/fake-crm', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(values) });
+    // The site's own thank-you, in place of the form (no page change).
+    document.getElementById('box').innerHTML = '<h2 style="margin-top:0">Thanks! We\'ll call you shortly.</h2><p class="note">(The answers went to the site\'s own server — there was no form submit.)</p>';
+    const result = document.getElementById('result');
+    result.style.display = 'block';
+    Demo.showResult(result, id, clickedAt);
+  });
+</script>
+</body>
+</html>

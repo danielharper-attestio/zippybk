@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo 3 — Step 2 of 2</title>
+<link rel="stylesheet" href="demo.css">
+<script>
+  // What a Facebook / Instagram in-app browser can do between two pages: everything this site stored is gone — the
+  // tracker's journey in local and session storage AND its cookie copy. Runs before our tracker loads.
+  if (new URLSearchParams(location.search).get('wipe') === '1') {
+    try { localStorage.clear(); sessionStorage.clear(); } catch (e) {}
+    for (const c of document.cookie.split(';')) { const n = c.split('=')[0].trim(); if (n.startsWith('attestio_')) document.cookie = n + '=; Path=/; Max-Age=0'; }
+    window.__wiped = true;
+  }
+</script>
+<script src="demo.js"></script>
+<script>Demo.loadTracker('dev2'); Demo.stampSubmitTime();</script>
+</head>
+<body>
+<header class="bar"><a href="/">← Demos</a><span class="badge" id="rid">Record ID: waiting for our server…</span></header>
+<main>
+  <h1>Demo 3 — Step 2 of 2</h1>
+  <div class="card result">
+    <dl>
+      <dt>Browser storage</dt><dd id="wiped"></dd>
+      <dt>Step 1's record ID</dt><dd class="mono" id="s1"></dd>
+      <dt>This page's record ID</dt><dd class="mono" id="s2">waiting for our server…</dd>
+      <dt>Same record?</dt><dd id="same">…</dd>
+    </dl>
+  </div>
+  <div class="card">
+    <form id="s2form" action="done.html" method="get">
+      <input type="hidden" name="demo" value="two-step">
+      <label for="full_name">Full name</label>
+      <input type="text" id="full_name" name="full_name" autocomplete="off">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" autocomplete="off" required>
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" name="phone" autocomplete="off">
+      <p class="consent">By clicking Submit you agree that we may contact you by phone and text message, including by
+        autodialer, at the number provided. Consent is not a condition of purchase.</p>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</main>
+<script>
+  const s1 = new URLSearchParams(location.search).get('s1') ?? '';
+  document.getElementById('wiped').innerHTML = window.__wiped ? '<span class="wait">Wiped before this page loaded</span> (as Facebook / Instagram can)' : 'Kept (the box on step 1 was not ticked)';
+  document.getElementById('s1').textContent = s1 || '—';
+  Demo.watchRecordId((id) => {
+    if (!id) return;
+    document.getElementById('s2').textContent = id;
+    document.getElementById('same').innerHTML = id === s1
+      ? '<span class="yes">Yes</span> — our server recognised step 1 and gave this page the same record'
+      : '<span class="no">No</span> — a new record (see the 15-minute note on step 1)';
+  });
+</script>
+</body>
+</html>

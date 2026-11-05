@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thank you — demo result</title>
+<link rel="stylesheet" href="demo.css">
+<script src="demo.js"></script>
+<script>
+  // The thank-you page has our tracker too, like a client's (it records itself briefly under the finished record).
+  Demo.loadTracker(new URLSearchParams(location.search).get('demo') === 'two-step' ? 'dev2' : 'dev');
+</script>
+</head>
+<body>
+<header class="bar"><a href="/">← Demos</a><span class="badge">Thank-you page</span></header>
+<main>
+  <h1>Thank you!</h1>
+  <p class="lead" id="what"></p>
+  <div class="card result" id="result"></div>
+  <p><a class="button" href="/">Try another demo</a></p>
+</main>
+<script>
+  const q = new URLSearchParams(location.search);
+  const id = q.get('attestio_record_id') ?? '';
+  const demo = q.get('demo');
+  const since = Number(q.get('demo_t')) || null;
+  document.getElementById('what').textContent = {
+    simple: 'The form arrived here — at the "client" — with the record ID below. The record was saved before the form was let go, so Inspect should find it on the first try.',
+    'email-check': 'The corrected submit was accepted by the page, so this time it became a lead — under the same record ID as the turned-down try.',
+    'two-step': 'Both steps were one visit. Below: one record, with step 1\'s and step 2\'s answers, starting on step 1.',
+  }[demo] ?? 'Here is what the record holds.';
+  const extra = {};
+  if (demo === 'two-step') {
+    // Filled in each time the record is read: did step 1's answers and step 2's land in ONE record?
+    extra.rows = '<dt>Both steps in this record?</dt><dd id="both">…</dd>';
+    extra.after = (r) => {
+      const a = r?.record?.answers ?? {};
+      const both = !!a.debt_amount && !!a.zip && !!a.email;
+      const el = document.getElementById('both');
+      if (el) el.innerHTML = both ? '<span class="yes">Yes</span> — step 1 (debt, ZIP) and step 2 (name, email, phone)' : '<span class="no">No</span>';
+    };
+  }
+  Demo.showResult(document.getElementById('result'), id, since, extra);
+</script>
+</body>
+</html>

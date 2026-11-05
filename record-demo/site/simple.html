@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo 1 — Saved at submit</title>
+<link rel="stylesheet" href="demo.css">
+<script src="demo.js"></script>
+<script>Demo.loadTracker('dev'); Demo.stampSubmitTime();</script>
+</head>
+<body>
+<header class="bar"><a href="/">← Demos</a><span class="badge" id="rid">Record ID: waiting for our server…</span></header>
+<main>
+  <h1>Demo 1 — Saved at submit</h1>
+  <p class="lead">Watch the record ID at the top: our server issues it when the page opens. When you press Submit, the
+  tracker saves the record first and only then lets the form go (it waits at most 2 seconds) — so the client's server
+  can ask Inspect the moment the lead arrives.</p>
+  <div class="card">
+    <form id="lead" action="done.html" method="get">
+      <input type="hidden" name="demo" value="simple">
+      <label for="full_name">Full name</label>
+      <input type="text" id="full_name" name="full_name" autocomplete="off">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" autocomplete="off" required>
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" name="phone" autocomplete="off">
+      <p class="consent">By clicking Submit you agree that we may contact you by phone and text message, including by
+        autodialer, at the number provided. Consent is not a condition of purchase.</p>
+      <button type="submit" id="go">Submit</button>
+    </form>
+  </div>
+</main>
+<script>Demo.watchRecordId();</script>
+</body>
+</html>

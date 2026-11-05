@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Record-at-submit demo</title>
+<link rel="stylesheet" href="demo.css">
+</head>
+<body>
+<header class="bar"><a href="/">Record-at-submit demo (local)</a><span class="badge">dashboard: localhost:3016</span></header>
+<main>
+  <h1>Try the new record flow</h1>
+  <p class="lead">Each demo is a small form with our tracker on it, like a client's page. Every new switch is on for the two
+  local test accounts. After you submit, the thank-you page asks Inspect for the record — exactly what a client's server
+  does — and shows what the record holds.</p>
+
+  <div class="grid">
+    <a class="card" href="simple.html"><strong>1. Saved at submit</strong>The record ID comes from our server; the form waits
+      (at most 2 s) until the record is saved, then goes. Inspect finds it at once.</a>
+    <a class="card" href="email-check.html"><strong>2. The page says no</strong>The page rejects the submit (a short phone
+      number): no lead. Fix it and submit again: a lead.</a>
+    <a class="card" href="step1.html"><strong>3. Two steps + a Facebook-style wipe</strong>The browser loses everything between
+      the steps; step 2 still joins step 1's record.</a>
+    <a class="card" href="script-send.html"><strong>4. Sent by the page's own code</strong>No normal submit at all — the page
+      sends the answers itself. It's still caught.</a>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0">Good to know</h2>
+    <ul class="steps">
+      <li>The ID in the dark bar at the top is the record ID our tracker put on the page's form (the hidden field a client
+        receives with the lead).</li>
+      <li>Demos 1, 2 and 4 use the <code>dev@test.com</code> account; demo 3 uses <code>dev2@test.com</code>. You can open
+        each record in the dashboard after logging in as that account.</li>
+      <li>Demo 3 joins step 2 to step 1 only when this browser has <em>one</em> journey on the account in the last
+        15 minutes (a safety rule: we never guess between two). To repeat it, wait 15 minutes or use another browser.</li>
+      <li>Use any made-up name and email, but not <code>monitoring@test.com</code> (that's the account's monitoring
+        address, which is never a lead).</li>
+    </ul>
+    <button class="secondary" id="reset">Forget this browser's journey</button>
+    <span class="note" id="reset-done"></span>
+  </div>
+</main>
+<script>
+  // Start clean: forget whatever journey our tracker kept for this site in this browser.
+  document.getElementById('reset').addEventListener('click', () => {
+    try { localStorage.clear(); sessionStorage.clear(); } catch (e) {}
+    for (const c of document.cookie.split(';')) { const n = c.split('=')[0].trim(); if (n.startsWith('attestio_')) document.cookie = n + '=; Path=/; Max-Age=0'; }
+    document.getElementById('reset-done').textContent = ' Done — the next demo starts a new visit.';
+  });
+</script>
+</body>
+</html>
