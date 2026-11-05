@@ -7,7 +7,9 @@ Four small forms with the Attestio tracker on them, to try the new record flow o
 2. **The page says no** (`site/email-check.html`) — the page refuses a 9-digit phone number: not a lead, listed as
    "Not submitted". Fixed and resubmitted: a lead with the same record ID.
 3. **Two steps + a Facebook-style wipe** (`site/step1.html`, `site/step2.html`) — the browser loses everything it
-   stored between the steps; step 2 still continues step 1's record (one record, both steps' answers).
+   stored between the steps; step 2 still continues step 1's record (one record, both steps' answers). It runs on its
+   own address, `http://127.0.0.1:8795/step1.html`, so it never continues a visit left unfinished in demos 1, 2 or 4
+   (those use the other test account; a browser keeps each address's stored data apart).
 4. **Sent by the page's own code** (`site/script-send.html`) — no form submit at all; still caught as a lead.
 
 After each submit, `site/done.html` asks the dashboard's Inspect API for the record (as a client's server would) and

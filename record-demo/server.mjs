@@ -2,6 +2,7 @@
 // them. The record lookups use the local Attestio dashboard's real Inspect API (:3016) with a local test API key that
 // stays here on the server side (never sent to the browser). Local test data only — it does not work on zippybk.com.
 import http from 'node:http';
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -26,11 +27,16 @@ function toUuid(id) {
 const readJson = (rel) => { try { return JSON.parse(fs.readFileSync(path.join(DATA, rel), 'utf8')); } catch { return null; } };
 const apiKey = () => { try { return JSON.parse(fs.readFileSync(KEY_FILE, 'utf8')).key; } catch { return null; } };
 
-async function inspectOnce(recordId) {
+/** The hash a client sends to have Inspect confirm an email (never the email itself): SHA-256 of the trimmed,
+ *  lower-cased address — the dashboard's normalizeForHash for emails. */
+const emailHash = (email) => crypto.createHash('sha256').update(String(email).trim().toLowerCase()).digest('hex');
+
+async function inspectOnce(recordId, email) {
   const key = apiKey();
   if (!key) return { status: 0, body: { error: 'no demo API key (run the key step)' } };
   try {
-    const r = await fetch(`${DASH}/v1/inspect`, { method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${key}` }, body: JSON.stringify({ record_id: recordId }) });
+    const body = { record_id: recordId, ...(email ? { pii: { email: emailHash(email) } } : {}) };
+    const r = await fetch(`${DASH}/v1/inspect`, { method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${key}` }, body: JSON.stringify(body) });
     return { status: r.status, body: await r.json().catch(() => null) };
   } catch (e) {
     return { status: 0, body: { error: String(e?.message ?? e) } };
@@ -60,7 +66,7 @@ function recordDetails(uuid) {
   };
 }
 
-async function result(recordId, since) {
+async function result(recordId, since, email) {
   const uuid = toUuid(recordId);
   if (!uuid) return { error: 'not a record ID' };
   fs.appendFileSync(LOG, `${new Date().toISOString()} ${recordId} ${uuid}\n`);
@@ -71,11 +77,15 @@ async function result(recordId, since) {
   let last = null;
   while (Date.now() - asked < 10_000) {
     tries += 1;
-    last = await inspectOnce(recordId);
+    last = await inspectOnce(recordId, email);
     if (last.status === 200) { found = Date.now(); break; }
     await sleep(100);
   }
   const s = last?.body?.session ?? null;
+  // The stored record can trail Inspect by a moment (a later step's version is rebuilt after the page accepts it):
+  // give it up to 3 s to hold the email this step sent, so the answers below match what Inspect said.
+  let record = recordDetails(uuid);
+  for (let i = 0; email && i < 30 && record?.answers?.email !== email; i++) { await sleep(100); record = recordDetails(uuid); }
   return {
     record_id: recordId,
     inspect: {
@@ -88,8 +98,9 @@ async function result(recordId, since) {
       page: s?.page?.url ?? null,
       referrer: s?.page?.referrer ?? null,
       error: last?.status === 200 ? null : (last?.body?.error ?? last?.body?.message ?? null),
+      email_confirmed: email ? (last?.body?.pii_match?.email ?? null) : null,
     },
-    record: recordDetails(uuid),
+    record,
   };
 }
 
@@ -112,7 +123,7 @@ http.createServer(async (req, res) => {
   const url = new URL(req.url ?? '/', `http://localhost:${PORT}`);
   const json = (code, body) => { res.writeHead(code, { 'content-type': 'application/json', 'cache-control': 'no-store' }); res.end(JSON.stringify(body)); };
   try {
-    if (url.pathname === '/demo-api/result') return json(200, await result(url.searchParams.get('id'), Number(url.searchParams.get('since')) || null));
+    if (url.pathname === '/demo-api/result') return json(200, await result(url.searchParams.get('id'), Number(url.searchParams.get('since')) || null, url.searchParams.get('email')));
     if (url.pathname === '/demo-api/status') return json(200, status(url.searchParams.get('id')));
     if (url.pathname === '/demo-api/fake-crm') { // the "client's server" a script-sent form posts to
       let body = '';

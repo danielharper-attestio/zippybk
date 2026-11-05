@@ -12,12 +12,12 @@
 </script>
 </head>
 <body>
-<header class="bar"><a href="/">← Demos</a><span class="badge">Thank-you page</span></header>
+<header class="bar"><a href="http://localhost:8795/">← Demos</a><span class="badge">Thank-you page</span></header>
 <main>
   <h1>Thank you!</h1>
   <p class="lead" id="what"></p>
   <div class="card result" id="result"></div>
-  <p><a class="button" href="/">Try another demo</a></p>
+  <p><a class="button" href="http://localhost:8795/">Try another demo</a></p>
 </main>
 <script>
   const q = new URLSearchParams(location.search);
@@ -29,7 +29,7 @@
     'email-check': 'The corrected submit was accepted by the page, so this time it became a lead — under the same record ID as the turned-down try.',
     'two-step': 'Both steps were one visit. Below: one record, with step 1\'s and step 2\'s answers, starting on step 1.',
   }[demo] ?? 'Here is what the record holds.';
-  const extra = {};
+  const extra = { email: q.get('email') ?? '' }; // what the "client" received with the form — Inspect is asked to confirm it
   if (demo === 'two-step') {
     // Filled in each time the record is read: did step 1's answers and step 2's land in ONE record?
     extra.rows = '<dt>Both steps in this record?</dt><dd id="both">…</dd>';

@@ -19,8 +19,8 @@
       (at most 2 s) until the record is saved, then goes. Inspect finds it at once.</a>
     <a class="card" href="email-check.html"><strong>2. The page says no</strong>The page rejects the submit (a short phone
       number): no lead. Fix it and submit again: a lead.</a>
-    <a class="card" href="step1.html"><strong>3. Two steps + a Facebook-style wipe</strong>The browser loses everything between
-      the steps; step 2 still joins step 1's record.</a>
+    <a class="card" href="http://127.0.0.1:8795/step1.html"><strong>3. Two steps + a Facebook-style wipe</strong>The browser
+      loses everything between the steps; step 2 still joins step 1's record. (Opens on its own address — see below.)</a>
     <a class="card" href="script-send.html"><strong>4. Sent by the page's own code</strong>No normal submit at all — the page
       sends the answers itself. It's still caught.</a>
   </div>
@@ -32,6 +32,9 @@
         receives with the lead).</li>
       <li>Demos 1, 2 and 4 use the <code>dev@test.com</code> account; demo 3 uses <code>dev2@test.com</code>. You can open
         each record in the dashboard after logging in as that account.</li>
+      <li>Demo 3 runs on its own address, <code>127.0.0.1:8795</code>: a browser keeps each address's stored data
+        apart, so demo 3 never continues a visit you left unfinished in demos 1, 2 or 4 (they belong to the other test
+        account — on a real client site every page is one account, so this can't happen there).</li>
       <li>Demo 3 joins step 2 to step 1 only when this browser has <em>one</em> journey on the account in the last
         15 minutes (a safety rule: we never guess between two). To repeat it, wait 15 minutes or use another browser.</li>
       <li>Use any made-up name and email, but not <code>monitoring@test.com</code> (that's the account's monitoring

@@ -45,7 +45,7 @@
     document.getElementById('box').innerHTML = '<h2 style="margin-top:0">Thanks! We\'ll call you shortly.</h2><p class="note">(The answers went to the site\'s own server — there was no form submit.)</p>';
     const result = document.getElementById('result');
     result.style.display = 'block';
-    Demo.showResult(result, id, clickedAt);
+    Demo.showResult(result, id, clickedAt, { email: values.email ?? '' });
   });
 </script>
 </body>

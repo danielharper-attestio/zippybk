@@ -57,7 +57,9 @@ window.Demo = (() => {
   /** Ask the demo helper what Inspect and the record say, and show it. */
   async function showResult(el, recordId, since, extra = {}) {
     el.innerHTML = '<p class="wait">Asking Inspect for this record, the way a client\'s server would…</p>';
-    const r = await fetch(`/demo-api/result?id=${encodeURIComponent(recordId)}&since=${since || ''}`).then((x) => x.json()).catch((e) => ({ error: String(e) }));
+    const q = new URLSearchParams({ id: recordId, since: since ? String(since) : '' });
+    if (extra.email) q.set('email', extra.email);
+    const r = await fetch(`/demo-api/result?${q}`).then((x) => x.json()).catch((e) => ({ error: String(e) }));
     if (r.error) { el.innerHTML = `<p class="no">${esc(r.error)}</p>`; return r; }
     if (!firstInspect[recordId] && r.inspect.status === 200) firstInspect[recordId] = r.inspect;
     const i = firstInspect[recordId] ?? r.inspect, rec = r.record;
@@ -70,6 +72,7 @@ window.Demo = (() => {
         <dt>Inspect</dt><dd>${found
           ? `<span class="yes">Found ${i.tries === 1 ? 'on the first try' : `on try ${i.tries}`}</span> — Inspect answered in ${esc(i.ms_after_asking)} ms${i.ms_after_click != null ? `<br><span class="note">${i.ms_after_click} ms after your click — that includes the save, the page sending the answers and this page loading</span>` : ''}`
           : `<span class="no">Not found</span> (${esc(i.status)}${i.error ? `: ${esc(i.error)}` : ''})`}</dd>
+        ${extra.email ? `<dt>Inspect confirms the email</dt><dd>${i.email_confirmed === true ? '<span class="yes">Yes</span>' : i.email_confirmed === false ? '<span class="no">No</span>' : '—'} <span class="note">(the client sends a hash of the email it received; Inspect says whether the record holds it)</span></dd>` : ''}
         ${extra.rows ?? ''}
         <dt>Answers in the record</dt><dd>${answers.length ? answers.map(([k, v]) => `${esc(k)}: <strong>${esc(v)}</strong>`).join('<br>') : '—'}</dd>
         <dt>Visit started</dt><dd>${time(rec?.started_at)}${lengthS != null ? ` (visit length ${lengthS} s)` : ''}</dd>
