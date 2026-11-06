@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fundavo Personal Loans | Personal Loans (Demo)</title>
+<meta name="description" content="Borrow $1,000 to $50,000 for debt consolidation, home improvement and more. See offers from lenders in minutes.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2040%2040%22%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%2218%22%20fill%3D%22%230e7c86%22/%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%2213%22%20fill%3D%22none%22%20stroke%3D%22%23ff5a5f%22%20stroke-width%3D%222%22/%3E%3Cpath%20d%3D%22M20%2028V12M14%2018l6-6%206%206%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%223.4%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ===================================================================
+     ATTESTIO: place the Attestio capture script here (same snippet as the
+     other zippybk forms). The form below only fires its native "submit"
+     event once every step is valid.
+     =================================================================== -->
+
+<style>
+  :root {
+    --brand: #0e7c86;
+    --brand-ink: #073b40;
+    --accent: #ff5a5f;
+    --accent-ink: #ffffff;
+    --accent-hover: #ec4a4f;
+    --tint: #e4f4f5;
+    --hero-bg: linear-gradient(135deg,#073b40 0%,#0e7c86 100%);
+    --hero-ink: #ffffff;
+    --ink: #1c2230;
+    --muted: #586174;
+    --line: #cfd5df;
+    --error: #c0262d;
+    --error-bg: #fdeeee;
+    --card: #ffffff;
+    --page: #f5f7fa;
+    --radius: 12px;
+    --head-font: 'Google Sans', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+    --body-font: 'Google Sans', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+    --base: 16px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--page); color: var(--ink);
+    font-family: var(--body-font); font-size: var(--base); line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg { max-width: 100%; }
+  a { color: var(--brand); }
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
+
+  /* Demo strip */
+  .demo-strip { background:#11151c; color:#e8ecf2; font: 500 13px/1.4 var(--body-font); }
+  .demo-strip .in { max-width:1180px; margin:0 auto; padding:7px 20px; display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+  .demo-strip a { color:#9fd3ff; text-decoration:none; font-weight:600; }
+  .demo-strip a:hover { text-decoration:underline; }
+
+  /* Header */
+  header.site { background:#fff; border-bottom:1px solid #e6e9ef; }
+  header.site .in { max-width:1180px; margin:0 auto; padding:12px 20px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+  .logo { display:flex; align-items:center; text-decoration:none; }
+  .logo svg { height:42px; width:auto; display:block; }
+  .head-right { display:flex; align-items:center; gap:14px; }
+  .head-note { font-size:13px; color:var(--muted); text-align:right; line-height:1.3; }
+  .head-phone { display:inline-flex; align-items:center; gap:8px; font-weight:700; color:var(--brand-ink); text-decoration:none; font-size:17px; white-space:nowrap; }
+  .head-phone svg { width:18px; height:18px; }
+
+  /* Hero + form */
+  .hero { background: var(--hero-bg); color: var(--hero-ink); }
+  .hero .in { max-width:1180px; margin:0 auto; padding:48px 20px 56px; display:grid; grid-template-columns: 1fr 520px; gap:48px; align-items:start; }
+  .eyebrow { display:inline-block; font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--hero-ink); opacity:.85; margin-bottom:12px; }
+  .hero h1 { font-family: var(--head-font); font-size: clamp(30px, 4vw, 46px); line-height:1.1; margin:0 0 16px; letter-spacing:-.01em; }
+  .hero .sub { font-size: 1.12em; margin:0 0 26px; opacity:.92; max-width: 34em; }
+  .bullets { list-style:none; margin:0 0 26px; padding:0; display:grid; gap:12px; }
+  .bullets li { display:flex; gap:12px; align-items:flex-start; }
+  .bullets svg { flex:0 0 24px; width:24px; height:24px; margin-top:1px; }
+  .trust { display:flex; flex-wrap:wrap; gap:10px; }
+  .trust span { font-size:13px; font-weight:600; padding:6px 12px; border-radius:999px; background: rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.25); }
+  .hero.light .trust span { background:#fff; border-color: var(--line); }
+
+  .card { background:var(--card); color:var(--ink); border-radius: calc(var(--radius) + 6px); box-shadow: 0 18px 50px rgba(16, 24, 40, .18); padding: 28px; position:relative; scroll-margin-top: 12px; }
+  .progress { margin: -4px 0 18px; }
+  .progress-meta { display:flex; justify-content:space-between; font-size:13px; color:var(--muted); margin-bottom:6px; font-weight:600; }
+  .bar { height:8px; border-radius:99px; background:#e7ebf1; overflow:hidden; }
+  .bar i { display:block; height:100%; width:0; background: var(--brand); border-radius:99px; transition: width .3s ease; }
+  .progress.is-hidden { visibility:hidden; height:0; margin:0; overflow:hidden; }
+
+  .step[hidden] { display:none !important; }
+  .step h2 { font-family: var(--head-font); font-size: 1.45em; line-height:1.2; margin: 0 0 6px; color: var(--brand-ink); outline:none; }
+  .step .hint { margin:0 0 18px; color:var(--muted); font-size:.95em; }
+  .field { margin: 0 0 16px; border:0; padding:0; min-width:0; }
+  .field[hidden] { display:none; }
+  .field > label, .field legend { display:block; font-weight:600; font-size:.92em; margin-bottom:6px; padding:0; }
+  .field .opt { font-weight:400; color:var(--muted); }
+  .row2 { display:grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+  input[type=text], input[type=tel], input[type=email], select, textarea {
+    width:100%; font: inherit; font-size: max(16px, 1em); color:var(--ink); background:#fff;
+    border:1.5px solid var(--line); border-radius: var(--radius); padding: 13px 14px; min-height:52px;
+    transition: border-color .15s, box-shadow .15s; -webkit-appearance:none; appearance:none;
+  }
+  textarea { min-height: 96px; resize: vertical; }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 16 16' fill='none' stroke='%231c2230' stroke-width='2'%3E%3Cpath d='M3.5 6l4.5 4.5L12.5 6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position: right 14px center; padding-right: 40px; cursor:pointer; }
+  input:focus, select:focus, textarea:focus { outline:none; border-color: var(--brand); box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 22%, transparent); }
+  .invalid input, .invalid select, .invalid textarea { border-color: var(--error); background: var(--error-bg); }
+  .err { color: var(--error); font-size: 13.5px; font-weight:500; margin-top:6px; display:flex; gap:6px; align-items:flex-start; }
+  .err:empty { display:none; }
+  .err::before { content:"!"; flex:0 0 16px; height:16px; border-radius:50%; background:var(--error); color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; margin-top:1px; }
+
+  .tiles { display:grid; grid-template-columns: repeat(var(--cols, 2), minmax(0,1fr)); gap:10px; }
+  .tile { position:relative; display:block; cursor:pointer; }
+  .tile input { position:absolute; opacity:0; inset:0; margin:0; cursor:pointer; }
+  .tile span { display:flex; align-items:center; justify-content:center; text-align:center; min-height:56px; padding:12px 12px; border:1.5px solid var(--line); border-radius: var(--radius); font-weight:600; background:#fff; transition: border-color .15s, background .15s, box-shadow .15s; line-height:1.25; }
+  .tile.multi span { justify-content:flex-start; text-align:left; gap:10px; }
+  .tile.multi span::before { content:""; flex:0 0 18px; height:18px; border:1.5px solid var(--line); border-radius:4px; background:#fff; }
+  .tile.multi input:checked + span::before { background: var(--brand) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-width='2.4'%3E%3Cpath d='M3.5 8.5l3 3 6-7'/%3E%3C/svg%3E") center/12px no-repeat; border-color: var(--brand); }
+  .tile:hover span { border-color: var(--brand); }
+  .tile input:focus-visible + span { box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 30%, transparent); border-color: var(--brand); }
+  .tile input:checked + span { border-color: var(--brand); background: var(--tint); color: var(--brand-ink); }
+  .invalid .tile span { border-color: color-mix(in srgb, var(--error) 55%, var(--line)); }
+
+  .notice { font-size: 13.5px; background: var(--tint); color: var(--brand-ink); border-radius: var(--radius); padding: 10px 12px; margin: -4px 0 16px; }
+  .notice[hidden] { display:none; }
+
+  .nav { display:flex; gap:12px; align-items:center; margin-top: 6px; }
+  .btn { font: inherit; font-weight:700; font-size: 1.05em; border:0; cursor:pointer; border-radius: var(--radius); padding: 15px 22px; min-height:54px; }
+  .btn-primary { flex:1; background: var(--accent); color: var(--accent-ink); box-shadow: 0 4px 0 color-mix(in srgb, var(--accent) 70%, #000); transition: transform .08s, background .15s; }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-primary:active { transform: translateY(2px); box-shadow: 0 2px 0 color-mix(in srgb, var(--accent) 70%, #000); }
+  .btn-primary[disabled] { opacity:.6; cursor:wait; }
+  .btn-back { background:none; color: var(--muted); padding: 15px 6px; font-weight:600; display:inline-flex; align-items:center; gap:4px; }
+  .btn-back:hover { color: var(--ink); }
+  .btn:focus-visible { outline: 3px solid var(--brand-ink); outline-offset: 2px; }
+
+  .consent-img { margin: 4px 0 14px; }
+  .consent-img img { display:block; width:100%; max-width:464px; height:auto; }
+  .consent { font-size: 11.5px; line-height: 1.5; color: #4a5263; margin: 4px 0 14px; }
+  .card-note { font-size: 12px; line-height:1.5; color:#4a5263; border-top:1px solid #e6e9ef; margin:16px 0 0; padding-top:12px; }
+  .secure { display:flex; align-items:center; justify-content:center; gap:6px; font-size:12.5px; color:var(--muted); margin-top:12px; }
+  .secure svg { width:14px; height:14px; }
+
+  .success { text-align:center; padding: 18px 4px 6px; }
+  .success[hidden] { display:none; }
+  .success .check { width:64px; height:64px; border-radius:50%; background: var(--tint); color: var(--brand); display:flex; align-items:center; justify-content:center; margin: 0 auto 14px; }
+  .success h2 { font-family: var(--head-font); color: var(--brand-ink); margin: 0 0 8px; font-size:1.6em; }
+  .success p { margin: 0 0 12px; color: var(--muted); }
+  .ref { display:inline-block; font: 600 14px/1 var(--body-font); letter-spacing:.04em; background: #f1f3f7; padding: 8px 12px; border-radius: 6px; color: var(--ink); margin-bottom: 14px; }
+  .demo-callout { text-align:left; background:#0f1722; color:#dfe7f2; border-radius:10px; padding:14px 16px; font-size:14px; margin: 6px 0 16px; }
+  .demo-callout b { color:#fff; }
+  .success .links { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+  .success .links .btn-attestio { grid-column: 1 / -1; }
+  .btn-attestio { display:inline-flex; align-items:center; justify-content:center; gap:8px; background:#fff; color: var(--ink); border:1.5px solid #4883E7; font-weight:600; font-size:.95em; padding: 8px 18px; min-height:52px; text-decoration:none; border-radius: var(--radius); box-shadow: 0 4px 14px rgba(15,23,42,.08); }
+  .btn-attestio:hover { background: #edf3fd; }
+  .btn-attestio img { height:28px; width:auto; display:block; }
+  .success .links .btn-ghost { justify-content:center; }
+  .card-col { position:relative; min-width:0; }
+  .card-back { display:inline-flex; align-items:center; gap:4px; margin-top:12px; font: 600 15px/1 var(--body-font); color: var(--brand-ink); background:#fff; border:1px solid var(--line); border-radius:999px; padding:9px 16px 9px 10px; cursor:pointer; box-shadow: 0 2px 8px rgba(16,24,40,.08); visibility:hidden; }
+  .card-back.on { visibility:visible; }
+  .card-back:hover { border-color: var(--brand); }
+  .card-back:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+  .btn-ghost { background:#fff; color: var(--brand-ink); border:1.5px solid var(--line); font-size:.95em; padding: 12px 18px; min-height:46px; text-decoration:none; display:inline-flex; align-items:center; }
+
+  /* Info strip */
+  .how { max-width:1180px; margin:0 auto; padding: 44px 20px 20px; }
+  .how h2 { font-family: var(--head-font); color: var(--brand-ink); font-size: 26px; margin: 0 0 18px; }
+  .how-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .how-item { background:#fff; border:1px solid #e3e7ee; border-radius: calc(var(--radius) + 4px); padding: 20px; }
+  .how-item b { display:block; font-size: 1.05em; margin-bottom: 4px; color: var(--brand-ink); }
+  .how-item p { margin:0; color: var(--muted); font-size: .95em; }
+  .how-num { width:32px; height:32px; border-radius:50%; background: var(--tint); color: var(--brand); font-weight:800; display:flex; align-items:center; justify-content:center; margin-bottom:10px; }
+
+  footer.site { max-width:1180px; margin: 0 auto; padding: 28px 20px 48px; color: #5d6576; font-size: 12.5px; line-height: 1.6; }
+  footer.site .disc { border-top: 1px solid #dfe3ea; padding-top: 20px; }
+  footer.site .disc p { margin: 0 0 10px; }
+  footer.site .fine { margin-top: 16px; display:flex; flex-wrap:wrap; gap: 6px 18px; align-items:center; }
+  footer.site .fine a { color:#5d6576; }
+  .ehl { display:inline-flex; align-items:center; gap:6px; font-weight:600; }
+  .ehl svg { width:22px; height:22px; }
+
+  @media (max-width: 980px) {
+    .hero .in { grid-template-columns: 1fr; gap: 22px; padding: 24px 16px 32px; }
+    .hero .sub { margin-bottom: 0; }
+    .hero .copy-extra { order: 3; }
+    .card-col { order: 2; }
+    .card { padding: 22px 18px; }
+    .how-grid { grid-template-columns: 1fr; }
+    .head-note { display:none; }
+  }
+  @media (max-width: 520px) {
+    header.site .in { padding: 10px 14px; }
+    .logo svg { height:34px; }
+    .head-phone span { display:none; }
+    .head-phone { width:42px; height:42px; justify-content:center; border-radius:50%; background: var(--tint); }
+    .hero h1 { font-size: 28px; }
+    .hero .sub { font-size: 1em; }
+    .tiles { grid-template-columns: repeat(var(--cols-m, 2), minmax(0,1fr)); }
+    .row2 { grid-template-columns: 1fr; }
+    .card { margin: 0 -4px; }
+    .success .links { grid-template-columns: 1fr; }
+    .demo-strip .in { padding: 6px 14px; font-size: 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+  /* ---------- Layout variants ---------- */
+  .layout-split-left .hero .in { grid-template-columns: 520px 1fr; }
+  .layout-split-left .card-col { order: -1; }
+
+  .layout-centered .hero .in { grid-template-columns: 1fr; max-width: 680px; text-align: center; padding-top: 44px; }
+  .layout-centered .copy-extra { display: none; }
+  .layout-centered .hero .sub { margin-left: auto; margin-right: auto; margin-bottom: 0; }
+  .layout-centered .hero .in { gap: 28px; }
+  .layout-centered .card-col { text-align: left; }
+
+  .layout-overlap .hero { background: var(--page); position: relative; }
+  .layout-overlap .hero::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 360px; background: var(--hero-bg); }
+  .layout-overlap .hero .in { position: relative; grid-template-columns: 1fr; max-width: 820px; text-align: center; gap: 10px; }
+  .layout-overlap .copy { display: contents; }
+  .layout-overlap .copy > .eyebrow, .layout-overlap .copy > h1, .layout-overlap .copy > .sub { order: 1; margin-left: auto; margin-right: auto; }
+  .layout-overlap .hero .sub { margin-bottom: 0; }
+  .layout-overlap .card-col { order: 2; text-align: left; width: 100%; max-width: 640px; margin: 18px auto 14px; }
+  .layout-overlap .copy-extra { order: 3; color: var(--ink); }
+  .layout-overlap .bullets { grid-template-columns: repeat(3, 1fr); text-align: left; }
+  .layout-overlap .trust { justify-content: center; }
+  .layout-overlap .trust span { background: #fff; border-color: var(--line); }
+
+  .layout-panel .hero { position: relative; background: #fff; color: var(--ink); }
+  .layout-panel .hero::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 50%; background: var(--hero-bg); }
+  .layout-panel .hero .in { position: relative; grid-template-columns: 1fr 1fr; gap: 72px; padding-top: 64px; padding-bottom: 72px; align-items: center; }
+  .layout-panel .copy { color: var(--hero-ink); }
+  .layout-panel .card { box-shadow: none; border: 1px solid #e6e9ef; }
+
+  /* ---------- Sidebar landing (form in a sticky sidebar) ---------- */
+  .lp-wrap { max-width: 1180px; margin: 0 auto; padding: 32px 20px 0; display: grid; grid-template-columns: 1fr 420px; gap: 40px; align-items: start; }
+  .lp-main .hero { background: var(--hero-bg); color: var(--hero-ink); border-radius: calc(var(--radius) + 10px); }
+  .lp-main .hero .in { display: block; padding: 40px 36px; }
+  .lp-main .sx-in { padding-left: 0; padding-right: 0; }
+  .lp-main .sx-alt { background: transparent; }
+  .lp-side { position: sticky; top: 16px; }
+  .lp-side .card { box-shadow: 0 10px 34px rgba(16,24,40,.12); }
+
+  /* ---------- Body sections ---------- */
+  .sx { padding: 56px 0; }
+  .sx-alt { background: #fff; border-top: 1px solid #e8ebf1; border-bottom: 1px solid #e8ebf1; }
+  .sx-in { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+  .sx h2 { font-family: var(--head-font); color: var(--brand-ink); font-size: clamp(24px, 3vw, 32px); line-height: 1.15; margin: 0 0 10px; letter-spacing: -.01em; }
+  .sx-eyebrow { display: block; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--brand); margin-bottom: 8px; }
+  .sx-intro { color: var(--muted); margin: 0 0 24px; max-width: 46em; }
+  .sx-note { color: var(--muted); font-size: 13px; margin: 14px 0 0; }
+  .sx-cards { display: grid; grid-template-columns: repeat(var(--c), minmax(0, 1fr)); gap: 16px; margin-top: 8px; }
+  .sx-card { background: #fff; border: 1px solid #e3e7ee; border-radius: calc(var(--radius) + 4px); padding: 20px; }
+  .sx-alt .sx-card { background: var(--page); }
+  .sx-card b { display: block; color: var(--brand-ink); margin-bottom: 4px; font-size: 1.04em; }
+  .sx-card p { margin: 0; color: var(--muted); font-size: .95em; }
+  .sx-ic { font-size: 26px; display: block; margin-bottom: 8px; line-height: 1; }
+  .sx-ic:empty { display: none; }
+  .sx-table { overflow-x: auto; border: 1px solid #e3e7ee; border-radius: calc(var(--radius) + 4px); background: #fff; margin-top: 8px; }
+  .sx-table table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: .95em; }
+  .sx-table th, .sx-table td { text-align: left; padding: 14px 16px; border-bottom: 1px solid #edf0f4; vertical-align: top; }
+  .sx-table thead th { background: var(--tint); color: var(--brand-ink); font-size: .85em; text-transform: uppercase; letter-spacing: .04em; }
+  .sx-table tbody th { color: var(--brand-ink); white-space: nowrap; }
+  .sx-table tr:last-child th, .sx-table tr:last-child td { border-bottom: 0; }
+  .sx-faq-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 40px; }
+  .sx-q { border-bottom: 1px solid #e3e7ee; }
+  .sx-q summary { cursor: pointer; list-style: none; padding: 16px 32px 16px 0; font-weight: 700; position: relative; color: var(--brand-ink); }
+  .sx-q summary::-webkit-details-marker { display: none; }
+  .sx-q summary::after { content: "+"; position: absolute; right: 4px; top: 12px; font-size: 22px; font-weight: 400; color: var(--brand); }
+  .sx-q[open] summary::after { content: "–"; }
+  .sx-q p { margin: 0 0 16px; color: var(--muted); }
+  .sx-q summary:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+  .sx-split { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: start; }
+  .sx-check { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 14px; }
+  .sx-check li { display: flex; gap: 12px; }
+  .sx-check svg { flex: 0 0 24px; width: 24px; height: 24px; }
+  .sx-check b { color: var(--brand-ink); }
+  .sx-check span { color: var(--muted); }
+  .sx-aside { background: var(--brand-ink); color: #fff; border-radius: calc(var(--radius) + 8px); padding: 26px; position: sticky; top: 16px; }
+  .sx-aside b { font-size: 1.2em; display: block; margin-bottom: 6px; }
+  .sx-aside p { margin: 0 0 16px; opacity: .85; }
+  .sx-link, .sx-btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; text-decoration: none; }
+  .sx-aside .sx-link { color: #fff; background: var(--accent); color: var(--accent-ink); padding: 12px 18px; border-radius: var(--radius); }
+  .sx-timeline { list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0; border-top: 3px solid var(--brand); }
+  .sx-timeline li { padding: 18px 18px 0 0; position: relative; }
+  .sx-timeline li::before { content: ""; position: absolute; top: -10px; left: 0; width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 3px solid var(--brand); }
+  .sx-when { display: block; font-size: 12.5px; font-weight: 700; color: var(--brand); text-transform: uppercase; letter-spacing: .04em; margin: 6px 0 4px; }
+  .sx-timeline b { display: block; color: var(--brand-ink); }
+  .sx-timeline p { margin: 4px 0 0; color: var(--muted); font-size: .95em; }
+  .sx-steps { list-style: none; padding: 0; margin: 12px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; counter-reset: n; }
+  .sx-steps li { background: #fff; border: 1px solid #e3e7ee; border-radius: calc(var(--radius) + 4px); padding: 20px; }
+  .sx-alt .sx-steps li { background: var(--page); }
+  .sx-n { display: inline-flex; width: 34px; height: 34px; border-radius: 10px; background: var(--brand); color: #fff; font-weight: 800; align-items: center; justify-content: center; margin-bottom: 10px; }
+  .sx-steps b { display: block; color: var(--brand-ink); }
+  .sx-steps p { margin: 4px 0 0; color: var(--muted); font-size: .95em; }
+  .sx-quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px; }
+  .sx-quote { margin: 0; background: #fff; border: 1px solid #e3e7ee; border-radius: calc(var(--radius) + 4px); padding: 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; }
+  .sx-alt .sx-quote { background: var(--page); }
+  .sx-quote blockquote { margin: 0; font-family: var(--head-font); color: var(--brand-ink); font-size: 1.05em; line-height: 1.45; }
+  .sx-quote figcaption { font-size: 13.5px; color: var(--muted); }
+  .sx-calc { background: #fff; border: 1px solid #e3e7ee; border-radius: calc(var(--radius) + 8px); padding: 24px; display: grid; gap: 10px; box-shadow: 0 10px 30px rgba(16,24,40,.06); }
+  .sx-calc label { font-weight: 600; font-size: .95em; display: flex; justify-content: space-between; gap: 8px; }
+  .sx-calc output { color: var(--brand); font-weight: 800; }
+  .sx-calc input[type=range] { width: 100%; accent-color: var(--brand); margin: 0 0 8px; }
+  .sx-calc select { margin-bottom: 8px; }
+  .sx-calc-out { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 6px; }
+  .sx-calc-out div { background: var(--tint); border-radius: var(--radius); padding: 14px; }
+  .sx-calc-out span { display: block; font-size: 12.5px; color: var(--brand-ink); font-weight: 600; }
+  .sx-calc-out b { font-size: 1.5em; color: var(--brand-ink); font-family: var(--head-font); }
+  .sx-cta-wrap { }
+  .sx-cta { background: var(--brand-ink); color: #fff; border-radius: calc(var(--radius) + 10px); padding: 34px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .sx-cta h2 { color: #fff; margin: 0 0 6px; }
+  .sx-cta p { margin: 0; opacity: .85; }
+  .sx-btn { background: var(--accent); color: var(--accent-ink); padding: 15px 22px; border-radius: var(--radius); white-space: nowrap; }
+  .sx-btn:hover { background: var(--accent-hover); }
+  .sx-prose p { margin: 0 0 14px; color: var(--muted); max-width: 46em; }
+  .sx-cta-sec, .sx.sx-cta { padding: 20px 0 56px; }
+
+  @media (max-width: 980px) {
+    .layout-split-left .hero .in { grid-template-columns: 1fr; }
+    .layout-split-left .card-col { order: 2; }
+    .layout-centered .hero .in { padding-top: 24px; }
+    .layout-overlap .hero::before { height: 300px; }
+    .layout-overlap .bullets { grid-template-columns: 1fr; }
+    .layout-panel .hero::before { width: 100%; bottom: auto; height: 100%; }
+    .layout-panel .hero .in { grid-template-columns: 1fr; gap: 22px; padding-top: 24px; padding-bottom: 32px; }
+    .layout-panel .card { box-shadow: 0 18px 50px rgba(16,24,40,.18); border: 0; }
+    .lp-wrap { grid-template-columns: 1fr; padding-top: 16px; gap: 0; }
+    .lp-side { position: static; order: -1; margin-bottom: 24px; }
+    .lp-main .hero .in { padding: 26px 20px; }
+    .sx-cards { grid-template-columns: 1fr 1fr; }
+    .sx-faq-grid, .sx-split { grid-template-columns: 1fr; gap: 20px; }
+    .sx-quotes { grid-template-columns: 1fr; }
+    .sx-aside { position: static; }
+    .sx-cta { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 520px) {
+    .sx { padding: 40px 0; }
+    .sx-cards { grid-template-columns: 1fr; }
+    .sx-timeline { grid-template-columns: 1fr; border-top: 0; border-left: 3px solid var(--brand); padding-left: 18px; }
+    .sx-timeline li { padding: 0 0 18px; }
+    .sx-timeline li::before { top: 4px; left: -28px; }
+    .sx-calc-out { grid-template-columns: 1fr; }
+    .sx-cta { padding: 24px; }
+    .sx-btn { width: 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body data-vertical="personal-loans" class="layout-overlap">
+
+<div class="demo-strip"><div class="in">
+  <span>Demo form · <strong>Fundavo Personal Loans</strong> is a fictitious company created for Attestio demonstrations.</span>
+  <a href="../">← All industries</a>
+</div></div>
+
+<header class="site"><div class="in">
+  <a class="logo" href="./" aria-label="Fundavo Personal Loans home"><svg viewBox="0 0 173 42" role="img" aria-label="Fundavo"><g transform="translate(0,1)"><circle cx="20" cy="20" r="18" fill="#0e7c86"/><circle cx="20" cy="20" r="13" fill="none" stroke="#ff5a5f" stroke-width="2"/><path d="M20 28V12M14 18l6-6 6 6" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></g><text x="49" y="22" font-family="Google Sans" font-size="19" font-weight="800" fill="#073b40" letter-spacing="-.2">Fundavo</text><text x="49" y="36" font-family="Google Sans" font-size="9.5" font-weight="600" letter-spacing="2.2" fill="#073b40" opacity=".7">PERSONAL LOANS</text></svg></a>
+  <div class="head-right">
+    <div class="head-note">Check rates in minutes<br>No impact to your credit score</div>
+    <a class="head-phone" href="tel:+18885550112" aria-label="Call (888) 555-0112">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1L6.6 10.8z"/></svg>
+      <span>(888) 555-0112</span>
+    </a>
+  </div>
+</div></header>
+
+<main>
+<section class="hero "><div class="in">
+  <div class="copy">
+    <span class="eyebrow">Personal loan offers</span>
+    <h1>Check personal loan rates without affecting your credit.</h1>
+    <p class="sub">Borrow $1,000 to $50,000 for debt consolidation, home improvement and more. See offers from lenders in minutes.</p>
+    <div class="copy-extra">
+      <ul class="bullets"><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="var(--tint)"/><path d="M7 12.5l3.2 3.2L17 9" stroke="var(--brand)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Loan amounts from $1,000 to $50,000</span></li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="var(--tint)"/><path d="M7 12.5l3.2 3.2L17 9" stroke="var(--brand)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Soft credit check: no impact to your score</span></li><li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="var(--tint)"/><path d="M7 12.5l3.2 3.2L17 9" stroke="var(--brand)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Funds as soon as the next business day, if approved</span></li></ul>
+      <div class="trust"><span>Soft credit check</span><span>Free to use</span><span>Secure 256-bit SSL</span></div>
+    </div>
+  </div>
+
+  <div class="card-col">
+  <div class="card" id="formCard">
+    <div class="progress is-hidden" id="progress" aria-hidden="true">
+      <div class="progress-meta"><span id="stepLabel"></span><span id="pctLabel"></span></div>
+      <div class="bar"><i id="barFill"></i></div>
+    </div>
+
+    <form id="leadForm" name="personal-loans-lead-form" method="post" action="" novalidate
+          data-vertical="Personal Loans" data-brand="Fundavo Personal Loans" autocomplete="on">
+      <section class="step" data-step="0">
+        <h2>How much would you like to borrow?</h2>
+        
+        <fieldset class="field" data-type="choice" data-label="Loan amount" data-required data-auto aria-describedby="loan_amount-err"><legend class="sr-only">Loan amount</legend><div class="tiles" style="--cols:2;--cols-m:2"><label class="tile"><input type="radio" name="loan_amount" value="$1,000–$4,999"><span>$1,000–$4,999</span></label><label class="tile"><input type="radio" name="loan_amount" value="$5,000–$9,999"><span>$5,000–$9,999</span></label><label class="tile"><input type="radio" name="loan_amount" value="$10,000–$19,999"><span>$10,000–$19,999</span></label><label class="tile"><input type="radio" name="loan_amount" value="$20,000–$34,999"><span>$20,000–$34,999</span></label><label class="tile"><input type="radio" name="loan_amount" value="$35,000–$50,000"><span>$35,000–$50,000</span></label></div><div class="err" id="loan_amount-err" aria-live="polite"></div></fieldset>
+        <div class="nav"><button type="button" class="btn btn-primary" data-action="next">Continue</button></div>
+      </section>
+      <section class="step" data-step="1" hidden>
+        <h2>What’s the loan for?</h2>
+        
+        <fieldset class="field" data-type="choice" data-label="Loan purpose" data-required data-auto aria-describedby="loan_purpose-err"><legend class="sr-only">Loan purpose</legend><div class="tiles" style="--cols:2;--cols-m:2"><label class="tile"><input type="radio" name="loan_purpose" value="Debt consolidation"><span>Debt consolidation</span></label><label class="tile"><input type="radio" name="loan_purpose" value="Credit card refinance"><span>Credit card refinance</span></label><label class="tile"><input type="radio" name="loan_purpose" value="Home improvement"><span>Home improvement</span></label><label class="tile"><input type="radio" name="loan_purpose" value="Major purchase"><span>Major purchase</span></label><label class="tile"><input type="radio" name="loan_purpose" value="Medical expenses"><span>Medical expenses</span></label><label class="tile"><input type="radio" name="loan_purpose" value="Other"><span>Other</span></label></div><div class="err" id="loan_purpose-err" aria-live="polite"></div></fieldset>
+        <div class="nav"><button type="button" class="btn btn-primary" data-action="next">Continue</button></div>
+      </section>
+      <section class="step" data-step="2" hidden>
+        <h2>How would you rate your credit?</h2>
+        <p class="hint">An estimate is fine.</p>
+        <fieldset class="field" data-type="choice" data-label="Credit rating" data-required data-auto aria-describedby="credit_rating-err"><legend class="sr-only">Credit rating</legend><div class="tiles" style="--cols:2;--cols-m:2"><label class="tile"><input type="radio" name="credit_rating" value="Excellent (720+)"><span>Excellent (720+)</span></label><label class="tile"><input type="radio" name="credit_rating" value="Good (680–719)"><span>Good (680–719)</span></label><label class="tile"><input type="radio" name="credit_rating" value="Fair (620–679)"><span>Fair (620–679)</span></label><label class="tile"><input type="radio" name="credit_rating" value="Poor (under 620)"><span>Poor (under 620)</span></label></div><div class="err" id="credit_rating-err" aria-live="polite"></div></fieldset>
+        <div class="nav"><button type="button" class="btn btn-primary" data-action="next">Continue</button></div>
+      </section>
+      <section class="step" data-step="3" hidden>
+        <h2>What’s your employment status?</h2>
+        
+        <fieldset class="field" data-type="choice" data-label="Employment" data-required data-auto aria-describedby="employment-err"><legend class="sr-only">Employment</legend><div class="tiles" style="--cols:2;--cols-m:2"><label class="tile"><input type="radio" name="employment" value="Employed full-time"><span>Employed full-time</span></label><label class="tile"><input type="radio" name="employment" value="Employed part-time"><span>Employed part-time</span></label><label class="tile"><input type="radio" name="employment" value="Self-employed"><span>Self-employed</span></label><label class="tile"><input type="radio" name="employment" value="Retired"><span>Retired</span></label><label class="tile"><input type="radio" name="employment" value="Other"><span>Other</span></label></div><div class="err" id="employment-err" aria-live="polite"></div></fieldset>
+        <div class="nav"><button type="button" class="btn btn-primary" data-action="next">Continue</button></div>
+      </section>
+      <section class="step" data-step="4" hidden>
+        <h2>What’s your annual income?</h2>
+        <p class="hint">Include all income you can verify.</p>
+        <div class="field" data-type="select" data-label="Annual income before taxes" data-required data-msg="Select your annual income."><label for="annual_income">Annual income before taxes</label><select id="annual_income" name="annual_income" aria-describedby="annual_income-err"><option value="">Select…</option><option>Under $25,000</option><option>$25,000–$39,999</option><option>$40,000–$59,999</option><option>$60,000–$79,999</option><option>$80,000–$99,999</option><option>$100,000–$149,999</option><option>$150,000+</option></select><div class="err" id="annual_income-err" aria-live="polite"></div></div>
+        <div class="nav"><button type="button" class="btn btn-primary" data-action="next">Continue</button></div>
+      </section>
+      <section class="step" data-step="5" hidden>
+        <h2>A couple of details to match you with lenders</h2>
+        
+        <div class="field" data-type="dob" data-label="Date of birth" data-required data-min-age="18" data-max-age="110" data-age-msg="You must be at least 18 to apply."><label for="dob">Date of birth</label><input type="text" id="dob" name="dob" aria-describedby="dob-err" inputmode="numeric" maxlength="10" placeholder="MM/DD/YYYY" autocomplete="bday"><div class="err" id="dob-err" aria-live="polite"></div></div>
+<div class="field" data-type="zip" data-label="ZIP code" data-required><label for="zip">ZIP code</label><input type="text" id="zip" name="zip" aria-describedby="zip-err" autocomplete="postal-code" inputmode="numeric" maxlength="5" placeholder="e.g. 75201"><div class="err" id="zip-err" aria-live="polite"></div></div>
+        <div class="nav"><button type="button" class="btn btn-primary" data-action="next">Continue</button></div>
+      </section>
+      <section class="step" data-step="6" hidden>
+        <h2>Where should we send your offers?</h2>
+        
+        <div class="row2"><div class="field" data-type="name" data-label="First name" data-required><label for="first_name">First name</label><input type="text" id="first_name" name="first_name" aria-describedby="first_name-err" autocomplete="given-name" autocapitalize="words" maxlength="50"><div class="err" id="first_name-err" aria-live="polite"></div></div><div class="field" data-type="name" data-label="Last name" data-required><label for="last_name">Last name</label><input type="text" id="last_name" name="last_name" aria-describedby="last_name-err" autocomplete="family-name" autocapitalize="words" maxlength="50"><div class="err" id="last_name-err" aria-live="polite"></div></div></div>
+<div class="field" data-type="email" data-label="Email address" data-required><label for="email">Email address</label><input type="email" id="email" name="email" aria-describedby="email-err" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" placeholder="name@example.com"><div class="err" id="email-err" aria-live="polite"></div></div>
+<div class="field" data-type="phone" data-label="Mobile phone" data-required><label for="phone">Mobile phone</label><input type="tel" id="phone" name="phone" aria-describedby="phone-err" autocomplete="tel-national" inputmode="tel" maxlength="14" placeholder="(555) 555-5555"><div class="err" id="phone-err" aria-live="polite"></div></div>
+        <p class="consent" id="consent-language" data-consent="tcpa">By clicking “Check My Rates,” I agree to the <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>, and I provide my electronic signature and express written consent for Fundavo Personal Loans and its authorized representatives to contact me at the phone number and email provided, including by calls and text messages that may use an automatic telephone dialing system, an artificial or prerecorded voice, or AI-generated voice, regarding personal loan offers and related financial products, even if my number is on a federal, state, or company do-not-call list. Consent is not a condition of any purchase. Message and data rates may apply; message frequency varies. Reply STOP to opt out of texts or HELP for help. I may revoke consent at any time by any reasonable means.</p><div class="nav"><button type="button" class="btn btn-primary" id="submitBtn" data-action="next">Check My Rates</button></div><div class="secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>Your information is encrypted and secure.</div>
+      </section>
+      <input type="hidden" name="vertical" value="Personal Loans">
+      <input type="hidden" name="brand" value="Fundavo Personal Loans">
+      <input type="hidden" name="attestio_token" id="attestio_token" value="">
+      <input type="hidden" name="page_url" id="page_url" value="">
+      <input type="hidden" name="submitted_at" id="submitted_at" value="">
+      <input type="hidden" name="consent_text" id="consent_text" value="">
+    </form>
+
+
+    <div class="success" id="success" hidden role="status" aria-live="polite">
+      <div class="check"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h2>Thanks, <span id="successName"></span>! We’re matching your offers.</h2>
+      <div class="demo-callout"><b>Demo:</b> this submission is now a record in your Attestio account, including the exact consent language shown above the button.</div>
+      <div class="links">
+        <button type="button" class="btn btn-ghost" id="again">Test again</button>
+        <a class="btn btn-ghost" href="../" data-other>Try another industry</a>
+        <a class="btn btn-attestio" href="https://app.attestio.com/login" target="_blank" rel="noopener">View result in <img src="data:image/png;base64,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" alt="Attestio" width="234" height="72"></a>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="card-back" id="cardBack" aria-label="Back to the previous question"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3L5 8l5 5"/></svg>Back</button>
+  </div>
+</div></section>
+
+<section class="sx sx-plain"><div class="sx-in"><div class="sx-split"><div><span class="sx-eyebrow">Plan your payment</span><h2>Estimate your monthly payment</h2><p class="sx-intro">Adjust the amount, APR and term to see how your monthly payment and total interest change.</p></div>
+<div class="sx-calc" id="loanCalc">
+  <label for="lc-amt">Loan amount: <output id="lc-amt-out">$10,000</output></label>
+  <input type="range" id="lc-amt" min="1000" max="50000" step="500" value="10000">
+  <label for="lc-apr">APR: <output id="lc-apr-out">15.99%</output></label>
+  <input type="range" id="lc-apr" min="7.99" max="35.99" step="0.25" value="15.99">
+  <label for="lc-term">Term</label>
+  <select id="lc-term"><option>24</option><option selected>36</option><option>48</option><option>60</option></select>
+  <div class="sx-calc-out"><div><span>Monthly payment</span><b id="lc-pay">–</b></div><div><span>Total interest</span><b id="lc-int">–</b></div></div>
+  <p class="sx-note">For illustration only. Your actual rate and terms depend on the lender and your credit profile.</p>
+</div></div></div></section>
+<section class="sx sx-alt"><div class="sx-in"><h2>Popular ways people use personal loans</h2><div class="sx-cards" style="--c:3"><div class="sx-card"><span class="sx-ic" aria-hidden="true">🔗</span><b>Debt consolidation</b><p>Combine high-interest balances into one fixed payment.</p></div><div class="sx-card"><span class="sx-ic" aria-hidden="true">🛠️</span><b>Home improvement</b><p>Fund repairs or upgrades without tapping home equity.</p></div><div class="sx-card"><span class="sx-ic" aria-hidden="true">🛋️</span><b>Major purchases</b><p>Cover big expenses with predictable monthly payments.</p></div><div class="sx-card"><span class="sx-ic" aria-hidden="true">🩹</span><b>Medical expenses</b><p>Spread out costs not covered by insurance.</p></div><div class="sx-card"><span class="sx-ic" aria-hidden="true">📦</span><b>Moving &amp; relocation</b><p>Deposits, movers and setup costs.</p></div><div class="sx-card"><span class="sx-ic" aria-hidden="true">🚨</span><b>Emergencies</b><p>Unexpected car or home repairs.</p></div></div></div></section>
+<section class="sx sx-plain"><div class="sx-in"><h2>Personal loan vs. other options</h2><div class="sx-table"><table><thead><tr><th scope='col'></th><th scope='col'>Personal loan</th><th scope='col'>Credit card</th><th scope='col'>Home equity line</th></tr></thead><tbody><tr><th scope='row'>Rate type</th><td>Usually fixed</td><td>Variable</td><td>Usually variable</td></tr><tr><th scope='row'>Collateral</th><td>Usually none</td><td>None</td><td>Your home</td></tr><tr><th scope='row'>Payment</th><td>Fixed monthly</td><td>Minimum varies</td><td>Varies with balance</td></tr><tr><th scope='row'>Best for</th><td>One-time costs, consolidation</td><td>Small, short-term spending</td><td>Large, ongoing projects</td></tr></tbody></table></div></div></section>
+<section class="sx sx-alt"><div class="sx-in"><div class="sx-faq-grid"><div><h2>Personal loan FAQs</h2></div><div class="sx-faq"><details class="sx-q"><summary>Will checking my rate affect my credit?</summary><p>No. Checking rates uses a soft credit inquiry. A lender may perform a hard inquiry if you accept an offer and apply.</p></details><details class="sx-q"><summary>How fast can I get funds?</summary><p>If approved, some lenders fund as soon as the next business day; timing varies by lender and bank.</p></details><details class="sx-q"><summary>What credit score do I need?</summary><p>Requirements vary by lender. Higher scores generally qualify for lower APRs.</p></details></div></div></div></section>
+</main>
+
+<footer class="site"><div class="disc">
+  <p>Fundavo Personal Loans is a fictitious loan marketplace used for demonstration purposes. In a live program, Fundavo would not be a lender and would not make credit decisions. Loan offers are subject to lender approval, and not all applicants will qualify. Rates, terms and loan amounts vary by lender, credit profile and state.</p>
+  <p>APRs from 7.99% to 35.99%. Repayment terms from 24 to 60 months. Representative example: a $10,000 loan with a 36-month term at 15.99% APR has a monthly payment of $351.52 and a total repayment of $12,654.75. Checking rates uses a soft credit inquiry; a lender may perform a hard inquiry if you accept an offer and apply.</p>
+  <div class="fine">
+    <span>© 2026 Fundavo Personal Loans. Fictitious company for demonstration purposes only.</span>
+    
+    <a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="../">Demo home</a>
+  </div>
+</div></footer>
+
+<script>
+(function () {
+  'use strict';
+  var form = document.getElementById('leadForm');
+  var card = document.getElementById('formCard');
+  var steps = Array.prototype.slice.call(form.querySelectorAll('.step'));
+  var progress = document.getElementById('progress');
+  var bar = document.getElementById('barFill');
+  var stepLabel = document.getElementById('stepLabel');
+  var pctLabel = document.getElementById('pctLabel');
+  var success = document.getElementById('success');
+  var current = 0;
+  var backBtn = document.getElementById('cardBack');
+  var submitting = false;
+
+  // Optional: set to your endpoint to POST each lead as JSON.
+  var POST_URL = '';
+
+  function val(name) {
+    var els = form.querySelectorAll('[name="' + name + '"]');
+    if (!els.length) return '';
+    if (els[0].type === 'radio') { for (var i = 0; i < els.length; i++) if (els[i].checked) return els[i].value; return ''; }
+    if (els[0].type === 'checkbox') { var out = []; for (var j = 0; j < els.length; j++) if (els[j].checked) out.push(els[j].value); return out.join('|'); }
+    return els[0].value;
+  }
+
+  function conditionMet(el) {
+    var f = el.getAttribute('data-show-field');
+    if (!f) return true;
+    var want = el.getAttribute('data-show-values').split('|');
+    var have = val(f).split('|');
+    for (var i = 0; i < have.length; i++) if (want.indexOf(have[i]) > -1) return true;
+    return false;
+  }
+
+  function activeSteps() { return steps.filter(conditionMet); }
+
+  function refreshConditionals() {
+    form.querySelectorAll('.field[data-show-field], .notice[data-show-field]').forEach(function (el) {
+      el.hidden = !conditionMet(el);
+    });
+  }
+
+  function setError(field, msg) {
+    var err = field.querySelector('.err');
+    field.classList.toggle('invalid', !!msg);
+    if (err) err.textContent = msg || '';
+    field.querySelectorAll('input, select, textarea').forEach(function (i) {
+      if (i.type === 'hidden') return;
+      if (msg) i.setAttribute('aria-invalid', 'true'); else i.removeAttribute('aria-invalid');
+    });
+  }
+
+  function digits(s) { return (s || '').replace(/\D/g, ''); }
+
+  function validateField(field) {
+    if (field.hidden) return '';
+    var type = field.getAttribute('data-type');
+    var required = field.hasAttribute('data-required');
+    var label = field.getAttribute('data-label') || 'this field';
+    var input = field.querySelector('input:not([type=radio]):not([type=checkbox]), select, textarea');
+    var v = input ? input.value.trim() : '';
+
+    if (type === 'choice') {
+      return field.querySelector('input:checked') ? '' : (field.getAttribute('data-msg') || 'Please choose an option to continue.');
+    }
+    if (type === 'multi') {
+      var min = parseInt(field.getAttribute('data-min') || '1', 10);
+      return field.querySelectorAll('input:checked').length >= min ? '' : (field.getAttribute('data-msg') || 'Select at least one option.');
+    }
+    if (!v) {
+      if (!required) return '';
+      if (field.getAttribute('data-msg')) return field.getAttribute('data-msg');
+      var empty = { zip: 'Enter your 5-digit ZIP code.', phone: 'Enter your phone number.', email: 'Enter your email address.',
+                    dob: 'Enter your date of birth (MM/DD/YYYY).', address: 'Enter your street address.' };
+      return empty[type] || ('Please enter your ' + label.toLowerCase() + '.');
+    }
+
+    switch (type) {
+      case 'zip':
+        if (!/^\d{5}$/.test(v) || v === '00000') return 'Enter a valid 5-digit ZIP code.';
+        break;
+      case 'name':
+        if (!/^[A-Za-z\u00C0-\u017F][A-Za-z\u00C0-\u017F' .-]{0,49}$/.test(v)) return 'Use letters only for ' + label.toLowerCase() + '.';
+        break;
+      case 'email':
+        if (!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(v)) return 'Enter a valid email address (like name@example.com).';
+        break;
+      case 'workemail':
+        if (!/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(v)) return 'Enter a valid work email (like name@company.com).';
+        if (/@(gmail|googlemail|yahoo|ymail|hotmail|outlook|live|msn|aol|icloud|me|mac|proton|protonmail|gmx|mail|zoho|yandex)\./i.test(v)) return 'Please use your work email address, not a personal one.';
+        break;
+      case 'phone':
+        var d = digits(v);
+        if (d.length !== 10) return 'Enter a 10-digit phone number.';
+        if (!/^[2-9]\d{2}[2-9]\d{6}$/.test(d)) return 'That phone number doesn’t look valid. Please check the area code.';
+        break;
+      case 'dob':
+        var m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(v);
+        if (!m) return 'Enter your date of birth as MM/DD/YYYY.';
+        var mo = +m[1], da = +m[2], yr = +m[3];
+        var dt = new Date(yr, mo - 1, da);
+        if (dt.getFullYear() !== yr || dt.getMonth() !== mo - 1 || dt.getDate() !== da) return 'Enter a real date (MM/DD/YYYY).';
+        var now = new Date();
+        var age = now.getFullYear() - yr - ((now.getMonth() < mo - 1 || (now.getMonth() === mo - 1 && now.getDate() < da)) ? 1 : 0);
+        var minAge = +(field.getAttribute('data-min-age') || 18), maxAge = +(field.getAttribute('data-max-age') || 110);
+        if (age < minAge) return field.getAttribute('data-age-msg') || ('You must be at least ' + minAge + ' years old.');
+        if (age > maxAge) return 'Please check the year you entered.';
+        break;
+      case 'address':
+        if (v.length < 5 || !/\d/.test(v) || !/[A-Za-z]/.test(v)) return 'Enter your street address, including the house number.';
+        break;
+      case 'text':
+        var minLen = +(field.getAttribute('data-minlen') || 0);
+        if (v.length < minLen) return 'Please enter at least ' + minLen + ' characters.';
+        break;
+    }
+    return '';
+  }
+
+  function validateStep(step) {
+    var firstBad = null;
+    step.querySelectorAll('.field').forEach(function (f) {
+      var msg = validateField(f);
+      setError(f, msg);
+      if (msg && !firstBad) firstBad = f;
+    });
+    if (firstBad) {
+      var target = firstBad.querySelector('input:not([type=hidden]), select, textarea');
+      if (target) target.focus({ preventScroll: true });
+      firstBad.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return false;
+    }
+    return true;
+  }
+
+  function show(index) {
+    var act = activeSteps();
+    var step = act[index];
+    steps.forEach(function (s) { s.hidden = s !== step; });
+    current = index;
+    backBtn.classList.toggle('on', index > 0);
+    var total = act.length;
+    var pct = Math.round((index / total) * 100);
+    if (total > 1) {
+      bar.style.width = Math.max(pct, 4) + '%';
+      stepLabel.textContent = 'Step ' + (index + 1) + ' of ' + total;
+      pctLabel.textContent = pct + '% complete';
+      // research-backed: hide progress on the first step to lower perceived effort
+      progress.classList.toggle('is-hidden', index === 0);
+    } else {
+      progress.classList.add('is-hidden');
+    }
+    // personalise headings with earlier answers, e.g. {zip}
+    var h = step.querySelector('h2');
+    if (h && h.getAttribute('data-tpl')) {
+      h.textContent = h.getAttribute('data-tpl').replace(/\{(\w+)\}/g, function (_, k) { return val(k) || ''; });
+    }
+    refreshConditionals();
+  }
+
+  function focusStep() {
+    var step = activeSteps()[current];
+    var h = step && step.querySelector('h2');
+    if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+    var r = card.getBoundingClientRect();
+    if (r.top < 0 || r.top > window.innerHeight * 0.5) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function next() {
+    if (submitting) return;
+    var act = activeSteps();
+    var step = act[current];
+    if (!validateStep(step)) return;
+    if (current >= act.length - 1) { finish(); return; }
+    show(current + 1);
+    focusStep();
+  }
+
+  function back() {
+    if (current > 0) { show(current - 1); focusStep(); }
+  }
+
+  function finish() {
+    // Only ever fire the native submit event once every step is valid,
+    // so capture scripts never record an empty or partial submission.
+    var act = activeSteps();
+    for (var i = 0; i < act.length; i++) {
+      if (!validateStep(act[i])) { show(i); return; }
+    }
+    var cl = document.getElementById('consent-language');
+    var ctext = (cl.innerText || '').trim();
+    if (!ctext) { var cimg = cl.querySelector('img'); if (cimg) ctext = cimg.alt; } // consent shown as an image
+    document.getElementById('consent_text').value = ctext;
+    document.getElementById('page_url').value = location.href;
+    document.getElementById('submitted_at').value = new Date().toISOString();
+    if (typeof form.requestSubmit === 'function') form.requestSubmit();
+    else form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+  }
+
+  // Enter key: never submits early. It moves forward one step, with validation.
+  form.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' || e.isComposing) return;
+    var t = e.target;
+    if (t.tagName === 'TEXTAREA') return;
+    if (t.tagName === 'BUTTON' || (t.tagName === 'A')) return; // let buttons handle their own activation
+    e.preventDefault();
+    next();
+  });
+
+  // Re-selecting an answer that is already chosen (e.g. after going Back) should still move forward
+  var wasChecked = null;
+  form.addEventListener('pointerdown', function (e) {
+    var tile = e.target.closest('.tile');
+    wasChecked = tile && tile.querySelector('input:checked') ? tile : null;
+  });
+  form.addEventListener('click', function (e) {
+    var tile = e.target.closest('.tile');
+    if (tile && tile === wasChecked && e.target.tagName === 'INPUT') {
+      var fld = tile.closest('.field');
+      if (fld && fld.hasAttribute('data-auto')) { wasChecked = null; setTimeout(next, 150); return; }
+    }
+    var b = e.target.closest('[data-action]');
+    if (!b) return;
+    e.preventDefault();
+    if (b.getAttribute('data-action') === 'next') next();
+    if (b.getAttribute('data-action') === 'back') back();
+  });
+
+  form.addEventListener('change', function (e) {
+    var field = e.target.closest('.field');
+    if (field && field.classList.contains('invalid')) setError(field, validateField(field));
+    refreshConditionals();
+    if (e.target.type === 'radio' && field && field.hasAttribute('data-auto')) {
+      var step = field.closest('.step');
+      var visibleFields = Array.prototype.filter.call(step.querySelectorAll('.field'), function (f) { return !f.hidden; });
+      if (visibleFields.length === 1) setTimeout(next, 220);
+    }
+  });
+
+  form.addEventListener('input', function (e) {
+    var t = e.target, field = t.closest('.field');
+    var type = field && field.getAttribute('data-type');
+    if (type === 'phone') {
+      var d = digits(t.value).replace(/^1(?=\d{10})/, '').slice(0, 10), o = d;
+      if (d.length > 6) o = '(' + d.slice(0, 3) + ') ' + d.slice(3, 6) + '-' + d.slice(6);
+      else if (d.length > 3) o = '(' + d.slice(0, 3) + ') ' + d.slice(3);
+      else if (d.length > 0) o = '(' + d;
+      t.value = o;
+    } else if (type === 'zip') {
+      t.value = digits(t.value).slice(0, 5);
+    } else if (type === 'dob') {
+      var x = digits(t.value).slice(0, 8), out = x;
+      if (x.length > 4) out = x.slice(0, 2) + '/' + x.slice(2, 4) + '/' + x.slice(4);
+      else if (x.length > 2) out = x.slice(0, 2) + '/' + x.slice(2);
+      t.value = out;
+    }
+    if (field && field.classList.contains('invalid')) setError(field, validateField(field));
+  });
+
+  form.addEventListener('focusout', function (e) {
+    var field = e.target.closest('.field');
+    if (!field || field.getAttribute('data-type') === 'choice' || field.getAttribute('data-type') === 'multi') return;
+    if (e.target.value && e.target.value.trim()) setError(field, validateField(field));
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (submitting) return;
+    submitting = true;
+    var payload = {};
+    new FormData(form).forEach(function (v, k) { payload[k] = payload[k] ? payload[k] + '|' + v : v; });
+    // ATTESTIO: the native submit event above is what capture scripts listen for.
+    // To also forward the lead, set POST_URL at the top of this script.
+    if (POST_URL) {
+      fetch(POST_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(function () {});
+    }
+    try { window.dispatchEvent(new CustomEvent('zippy:lead', { detail: payload })); } catch (err) {}
+    if (window.console) console.log('[demo] lead submitted', payload);
+    document.getElementById('successName').textContent = (payload.first_name || '').trim();
+    form.hidden = true;
+    progress.classList.add('is-hidden');
+    success.hidden = false;
+    backBtn.classList.remove('on');
+    var h = success.querySelector('h2'); h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true });
+    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  backBtn.addEventListener('click', back);
+
+  document.getElementById('again').addEventListener('click', function () {
+    form.reset();
+    form.querySelectorAll('.field').forEach(function (f) { setError(f, ''); });
+    submitting = false;
+    success.hidden = true;
+    form.hidden = false;
+    show(0);
+    focusStep();
+  });
+
+  show(0);
+})();
+
+(function () {
+  function money(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+  // Jump links focus the first field of the form
+  document.querySelectorAll('[data-jump]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var card = document.getElementById('formCard');
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var f = card.querySelector('.step:not([hidden]) input:not([type=hidden]), .step:not([hidden]) select');
+      if (f) setTimeout(function () { f.focus({ preventScroll: true }); }, 450);
+    });
+  });
+  var sc = document.getElementById('solarCalc');
+  if (sc) {
+    var bill = document.getElementById('sc-bill'), sun = document.getElementById('sc-sun');
+    var calcS = function () {
+      var b = +bill.value, rate = 0.17, kwhMonth = b / rate;
+      var kw = kwhMonth / (+sun.value * 30 * 0.8);
+      var total = 0, y = b * 12;
+      for (var i = 0; i < 25; i++) { total += y; y *= 1.025; }
+      document.getElementById('sc-bill-out').textContent = money(b);
+      document.getElementById('sc-kw').textContent = kw.toFixed(1) + ' kW';
+      document.getElementById('sc-save').textContent = money(total);
+    };
+    bill.addEventListener('input', calcS); sun.addEventListener('change', calcS); calcS();
+  }
+  var lc = document.getElementById('loanCalc');
+  if (lc) {
+    var amt = document.getElementById('lc-amt'), apr = document.getElementById('lc-apr'), term = document.getElementById('lc-term');
+    var calcL = function () {
+      var P = +amt.value, r = +apr.value / 1200, n = +term.value;
+      var pay = P * r / (1 - Math.pow(1 + r, -n));
+      document.getElementById('lc-amt-out').textContent = money(P);
+      document.getElementById('lc-apr-out').textContent = (+apr.value).toFixed(2) + '%';
+      document.getElementById('lc-pay').textContent = '$' + pay.toFixed(2);
+      document.getElementById('lc-int').textContent = money(pay * n - P);
+    };
+    [amt, apr].forEach(function (x) { x.addEventListener('input', calcL); }); term.addEventListener('change', calcL); calcL();
+  }
+})();
+</script>
+<script>
+/* Attestio login link: on a local test server (localhost / 127.0.0.1) open the LOCAL dashboard's login instead of
+   app.attestio.com. Covers links added later too (e.g. a thank-you screen built after submit). No-op on zippybk.com. */
+(function () {
+  var h = location.hostname;
+  if (h !== 'localhost' && h !== '127.0.0.1' && h !== '[::1]') return;
+  var LIVE = 'https://app.attestio.com/login', LOCAL = 'http://localhost:3001/login';
+  function fix(a) { if (a && a.getAttribute('href') === LIVE) a.setAttribute('href', LOCAL); }
+  document.querySelectorAll('a[href="' + LIVE + '"]').forEach(fix);
+  ['click', 'auxclick', 'contextmenu'].forEach(function (t) {
+    document.addEventListener(t, function (e) { fix(e.target && e.target.closest ? e.target.closest('a') : null); }, true);
+  });
+})();
+</script>
+</body>
+</html>
