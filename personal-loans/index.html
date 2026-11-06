@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-NCFDHKGC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Fundavo Personal Loans | Personal Loans (Demo)</title>
@@ -834,6 +840,15 @@
     document.addEventListener(t, function (e) { fix(e.target && e.target.closest ? e.target.closest('a') : null); }, true);
   });
 })();
+</script>
+<script>
+/* Google Analytics: count clicks on the Attestio buttons as two separate events:
+   "Log in to Attestio" (homepage header) and "View result in Attestio" (after a form submit). */
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a');
+  if (!a || !/\/login$/.test(a.pathname) || !/(^|\.)attestio\.com$|^localhost$/.test(a.hostname)) return;
+  gtag('event', a.hasAttribute('data-attestio-login') ? 'attestio_login_click' : 'attestio_result_click');
+}, true);
 </script>
 </body>
 </html>
