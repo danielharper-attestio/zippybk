@@ -95,21 +95,21 @@
 
   <section data-qa="blocktype-short_text deep-purple-blocktype-short_text" data-step="4" class="hidden">
     <h1 data-qa="block-title deep-purple-block-title">What is your full name?*</h1>
-    <input type="text" name="full_name" autocomplete="name" placeholder="Type your answer here...">
+    <input type="text" name="full_name" data-attestio-field="name" autocomplete="name" placeholder="Type your answer here...">
     <button type="button" class="ok" data-qa="ok-button-visible deep-purple-ok-button-visible">OK</button>
   </section>
 
   <section data-qa="blocktype-email deep-purple-blocktype-email" data-step="5" class="hidden">
     <h1 data-qa="block-title deep-purple-block-title">What is your email address?*</h1>
-    <input type="email" name="email" autocomplete="email" placeholder="name@example.com">
+    <input type="email" name="email" data-attestio-field="email" autocomplete="email" placeholder="name@example.com">
     <button type="button" class="ok" data-qa="ok-button-visible deep-purple-ok-button-visible">OK</button>
   </section>
 
   <section data-qa="blocktype-phone_number deep-purple-blocktype-phone_number" data-step="6" class="hidden">
     <h1 data-qa="block-title deep-purple-block-title">And your phone number?*</h1>
     <div data-qa="block-description">A specialist will call you about your options.</div>
-    <input type="tel" name="phone_number" autocomplete="tel" placeholder="(201) 555-0123">
-    <p class="legal">By clicking Submit, I agree to be contacted by ZippyBK and its partners at the number provided,
+    <input type="tel" name="phone_number" data-attestio-field="phone" autocomplete="tel" placeholder="(201) 555-0123">
+    <p class="legal" data-attestio-field="tcpa">By clicking Submit, I agree to be contacted by ZippyBK and its partners at the number provided,
       including by autodialed and prerecorded calls and text messages, even if my number is on a Do Not Call list.
       Consent is not a condition of purchase. Message and data rates may apply. I have read and agree to the
       Privacy Policy and TCPA disclosure.</p>

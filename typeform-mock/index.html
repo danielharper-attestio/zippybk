@@ -179,16 +179,21 @@
     r.setAttribute('aria-valuetext', label);
     r.style.background = 'linear-gradient(to right, var(--blue) 0%, var(--blue) ' + pct + '%, #eee ' + pct + '%, #eee 100%)';
   }
+  // Attestio field tags (Form Field Annotation Guide): contact fields are named, the birth date is masked.
+  var TAGS = { first_name: ' data-attestio-field="first-name"', last_name: ' data-attestio-field="last-name"', email: ' data-attestio-field="email"',
+    phone: ' data-attestio-field="phone"', street: ' data-attestio-field="address-line1"', city: ' data-attestio-field="city"',
+    state: ' data-attestio-field="state"', zip: ' data-attestio-field="postal-code"',
+    dob_month: ' data-attestio-mask', dob_day: ' data-attestio-mask', dob_year: ' data-attestio-mask' };
   function fieldHTML(f) {
     var cls = 'fl' + (f.half ? ' half' : '') + (f.third ? ' third' : '');
     var v = ans[f.id] || '', ctrl;
     if (f.type === 'select') {
-      ctrl = '<select id="' + f.id + '" aria-describedby="' + f.id + '-msg"><option value=""></option>' +
+      ctrl = '<select id="' + f.id + '"' + (TAGS[f.id] || '') + ' aria-describedby="' + f.id + '-msg"><option value=""></option>' +
         f.options.map(function (o) { return '<option' + (o === v ? ' selected' : '') + '>' + e(o) + '</option>'; }).join('') + '</select>';
     } else {
       var type = f.type === 'email' ? 'email' : f.type === 'phone' ? 'tel' : 'text';
       var im = f.type === 'zip' ? ' inputmode="numeric" maxlength="5"' : f.type === 'phone' ? ' inputmode="tel" maxlength="14"' : f.type === 'email' ? ' inputmode="email" autocapitalize="off" spellcheck="false"' : '';
-      ctrl = '<input id="' + f.id + '" type="' + type + '"' + im + (f.ac ? ' autocomplete="' + f.ac + '"' : '') + ' aria-describedby="' + f.id + '-msg" value="' + e(v) + '">';
+      ctrl = '<input id="' + f.id + '"' + (TAGS[f.id] || '') + ' type="' + type + '"' + im + (f.ac ? ' autocomplete="' + f.ac + '"' : '') + ' aria-describedby="' + f.id + '-msg" value="' + e(v) + '">';
     }
     return '<div class="' + cls + '" data-id="' + f.id + '"><label for="' + f.id + '">' + e(f.label) + '</label>' + ctrl +
            '<span class="x" aria-hidden="true">✕</span><div class="msg" id="' + f.id + '-msg" role="alert"></div></div>';
@@ -221,7 +226,7 @@
       }).join('') + '</div><div class="fl" style="margin-top:8px"><div class="msg" id="choice-msg" role="alert"></div></div>';
     } else {
       h += '<div class="fields">' + s.fields.map(fieldHTML).join('') + '</div>';
-      if (s.final) h += '<p class="consent" id="consent-language" data-consent="tcpa">' + CONSENT + '</p>';
+      if (s.final) h += '<p class="consent" id="consent-language" data-consent="tcpa" data-attestio-field="tcpa">' + CONSENT + '</p>';
       h += '<button type="button" class="next" id="nextBtn">' + (s.final ? e(BTN) : 'Next') + ' ' + ARROW + '</button>';
       if (s.terms) h += '<p class="terms">By clicking ‘Next’, I confirm that I have read and agree to the <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a> of this site.</p>';
     }
