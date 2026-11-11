@@ -42,6 +42,7 @@
     [role="radiogroup"] { display: flex; gap: 12px; flex-wrap: wrap; }
     button[data-qa="choice"] { border: 1px solid #d4d4e0; background: #f5f5f8; padding: 18px 16px; min-width: 150px; cursor: pointer; border-radius: 6px; font: inherit; color: var(--ink); text-align: center; }
     button[data-qa="choice"] b { display: block; font-size: 16px; letter-spacing: .5px; }
+    button[data-qa="choice"] img { display: block; margin: 0 auto 10px; }
     button[data-qa="choice"][aria-checked="true"] { border-color: var(--accent); background: #ecebff; }
     input { font: inherit; font-size: 22px; padding: 8px 2px; border: 0; border-bottom: 2px solid var(--accent); outline: none; width: 100%; max-width: 440px; background: transparent; }
     .ok, .submit { margin-top: 18px; background: var(--accent); color: #fff; border: 0; padding: 10px 20px; font-size: 16px; border-radius: 4px; cursor: pointer; font: inherit; }
@@ -62,9 +63,9 @@
   <section data-qa="blocktype-picture_choice deep-purple-blocktype-picture_choice" data-step="1">
     <h1 data-qa="block-title deep-purple-block-title">How much credit card debt do you have at this time?*</h1>
     <div role="radiogroup">
-      <button type="button" data-qa="choice" role="radio" aria-checked="false" aria-label="Option A"><img alt="Under 10,000" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="1" height="1"><b>UNDER $10,000</b></button>
-      <button type="button" data-qa="choice" role="radio" aria-checked="false" aria-label="Option B"><img alt="Over 25,000" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="1" height="1"><b>OVER $25,000</b></button>
-      <button type="button" data-qa="choice" role="radio" aria-checked="false" aria-label="Option C"><img alt="Between 10,000 and 25,000" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="1" height="1"><b>BETWEEN</b></button>
+      <button type="button" data-qa="choice" role="radio" aria-checked="false" aria-label="Option A"><img alt="Under 10,000" src="images/debt-under-10000.png" width="120" height="90"><b>UNDER $10,000</b></button>
+      <button type="button" data-qa="choice" role="radio" aria-checked="false" aria-label="Option B"><img alt="Over 25,000" src="images/debt-over-25000.png" width="120" height="90"><b>OVER $25,000</b></button>
+      <button type="button" data-qa="choice" role="radio" aria-checked="false" aria-label="Option C"><img alt="Between 10,000 and 25,000" src="images/debt-10000-25000.png" width="120" height="90"><b>BETWEEN</b></button>
     </div>
     <button type="button" class="ok" data-qa="ok-button-visible deep-purple-ok-button-visible">OK</button>
   </section>
@@ -72,9 +73,9 @@
   <section data-qa="blocktype-picture_choice deep-purple-blocktype-picture_choice" data-step="2" class="hidden">
     <h1 data-qa="block-title deep-purple-block-title">Are you currently paying on your debt?*</h1>
     <div role="radiogroup">
-      <button type="button" data-qa="choice" role="radio" aria-checked="false" aria-label="Option A"><img alt="No" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="1" height="1"><b>No</b></button>
-      <button type="button" data-qa="choice" role="radio" aria-checked="false" aria-label="Option B"><img alt="Yes" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="1" height="1"><b>Yes</b></button>
-      <button type="button" data-qa="choice" role="radio" aria-checked="false" aria-label="Option C"><img alt="Sometimes" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="1" height="1"><b>Sometimes</b></button>
+      <button type="button" data-qa="choice" role="radio" aria-checked="false" aria-label="Option A"><img alt="No" src="images/paying-no.png" width="120" height="90"><b>No</b></button>
+      <button type="button" data-qa="choice" role="radio" aria-checked="false" aria-label="Option B"><img alt="Yes" src="images/paying-yes.png" width="120" height="90"><b>Yes</b></button>
+      <button type="button" data-qa="choice" role="radio" aria-checked="false" aria-label="Option C"><img alt="Sometimes" src="images/paying-sometimes.png" width="120" height="90"><b>Sometimes</b></button>
     </div>
     <button type="button" class="ok" data-qa="ok-button-visible deep-purple-ok-button-visible">OK</button>
   </section>
