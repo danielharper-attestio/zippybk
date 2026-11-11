@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-NCFDHKGC"></script>
@@ -13,96 +13,232 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 </script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TurboDebt (multi-page test) — Getting started</title>
-  <style>
-    :root { --brand:#0b5f4e; --brand-2:#10b981; --ink:#1a1a1a; --muted:#667085; --line:#e4e7ec; --bg:#f5f7fa; --radius:12px; }
-    * { box-sizing:border-box; }
-    html { background:var(--bg); }
-    body { font-family:system-ui,-apple-system,"Segoe UI",sans-serif; background:var(--bg); color:var(--ink); margin:0; padding:40px 16px; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; }
-    .card { width:100%; max-width:40rem; background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:0 8px 30px rgba(16,24,40,.06); padding:32px; }
-    header .brand { font-size:1.6rem; font-weight:800; color:var(--brand); letter-spacing:-.02em; }
-    header .tagline { color:var(--muted); margin-top:4px; font-size:.95rem; line-height:1.5; }
-    .ok-badge { display:inline-flex; align-items:center; gap:6px; background:#e7f7f0; color:var(--brand); border:1px solid #b6e6d4; padding:6px 12px; border-radius:999px; font-size:13px; font-weight:600; }
-    .progress { display:flex; gap:6px; margin:4px 0 24px; }
-    .progress span { flex:1; height:5px; background:#e2e2e2; border-radius:3px; }
-    .progress span.done { background:var(--brand-2); }
-    h2 { margin:0 0 4px; font-size:1.3rem; }
-    p.hint { color:var(--muted); margin:0 0 4px; font-size:.95rem; }
-    .options { display:grid; gap:10px; margin-top:18px; }
-    .option-btn { display:block; width:100%; text-align:left; padding:14px 16px; font-size:1rem; font-weight:600; border:2px solid var(--line); border-radius:var(--radius); background:#fff; cursor:pointer; transition:all .12s; }
-    .option-btn:hover { border-color:var(--brand-2); background:#f6fefb; }
-    .option-btn input[type="radio"] { position:absolute; opacity:0; pointer-events:none; }
-    .option-btn:has(input:checked) { border-color:var(--brand); background:#eafaf5; }
-    label.fld { display:block; margin-top:18px; font-weight:600; font-size:.95rem; }
-    input[type="text"], select { width:100%; padding:12px 14px; margin-top:6px; font-size:1rem; border:1px solid var(--line); border-radius:var(--radius); outline:none; }
-    input:focus, select:focus { border-color:var(--brand-2); box-shadow:0 0 0 3px rgba(16,185,129,.12); }
-    .nav-buttons { display:flex; justify-content:flex-end; align-items:center; margin-top:24px; }
-    button.next { padding:12px 22px; font-size:1rem; font-weight:600; cursor:pointer; background:var(--brand); color:#fff; border:none; border-radius:999px; transition:background .12s; }
-    button.next:hover { background:#094c3f; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get started — Clearwater Debt Solutions</title>
+<!-- Attestio: installed through Google Tag Manager (GTM-PJZ933NB above), like every ZippyBK form -->
+<style>
+:root { --navy: #0E2A47; --teal: #0B7A75; --teal-dark: #08625E; --teal-bg: #E7F4F3; --ink: #14213D; --ink-soft: #3E4A5E; --mute: #66728A; --rule: #D9DEE7; --bg: #F5F7FA; --red: #B42318; --red-bg: #FEF3F2;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { font-family: var(--font); color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased; }
+a { color: var(--teal-dark); }
+.top { background: #fff; border-bottom: 1px solid var(--rule); }
+.top-in { max-width: 980px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--navy); font-weight: 700; font-size: 17px; letter-spacing: -.01em; }
+.brand-mark { width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg, var(--teal), #1FA59C); display: grid; place-items: center; color: #fff; font-size: 15px; }
+.top-call { font-size: 13.5px; color: var(--ink-soft); text-align: right; line-height: 1.3; }
+.top-call b { display: block; color: var(--navy); font-size: 15px; }
+.wrap { max-width: 640px; margin: 0 auto; padding: 28px 20px 40px; }
+.progress { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.bar { flex: 1; height: 8px; background: #E4E8EF; border-radius: 999px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--teal); border-radius: 999px; transition: width .3s ease; }
+.pct { font-size: 12.5px; color: var(--mute); white-space: nowrap; min-width: 82px; text-align: right; }
+.card { background: #fff; border: 1px solid var(--rule); border-radius: 16px; padding: 28px; box-shadow: 0 18px 40px -30px rgba(14,42,71,.35); }
+h1 { font-size: 24px; line-height: 1.25; margin: 0 0 8px; color: var(--navy); letter-spacing: -.01em; outline: none; }
+.lede { margin: 0 0 20px; font-size: 15px; line-height: 1.5; color: var(--ink-soft); }
+.choices { display: grid; gap: 10px; margin-bottom: 6px; }
+.choice { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 15px 16px; border: 1.5px solid var(--rule); border-radius: 12px; cursor: pointer; font-size: 15.5px; font-weight: 500; background: #fff; transition: border-color .15s, background .15s; }
+.choice:hover { border-color: #9FB0C6; }
+.choice input { position: absolute; opacity: 0; pointer-events: none; }
+.choice i { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--rule); display: grid; place-items: center; color: transparent; flex-shrink: 0; }
+.choice:has(input:checked) { border-color: var(--teal); background: var(--teal-bg); }
+.choice:has(input:checked) i { background: var(--teal); border-color: var(--teal); color: #fff; }
+.choice:has(input:focus-visible) { outline: 3px solid rgba(11,122,117,.35); outline-offset: 2px; }
+/* One standard for every field: a label above its control, the same gap below each field */
+.field { margin: 0 0 20px; }
+.fields > .field:last-child, .fields > .grid2:last-child { margin-bottom: 0; }
+.lbl { display: block; font-size: 14px; font-weight: 600; color: var(--ink-soft); margin: 0 0 8px; }
+input[type=text], input[type=email], input[type=tel], input[type=password], select { width: 100%; height: 50px; padding: 0 14px; border: 1.5px solid var(--rule); border-radius: 10px; font: inherit; font-size: 16px; color: var(--ink); background: #fff; }
+input:focus, select:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(11,122,117,.18); }
+.bad input, .bad select, input.bad, select.bad { border-color: var(--red); }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0 0 20px; }
+.grid2 > .field { margin: 0; }
+.hint { margin: 6px 0 0; font-size: 13px; color: var(--mute); line-height: 1.45; }
+.hint.secure { display: flex; gap: 8px; align-items: flex-start; color: var(--ink-soft); }
+.hint.secure svg { flex-shrink: 0; margin-top: 1px; color: var(--teal); }
+.ssn-wrap { position: relative; }
+.ssn-wrap input { padding-right: 52px; letter-spacing: .04em; }
+.ssn-eye { position: absolute; right: 6px; top: 6px; width: 38px; height: 38px; border: 0; border-radius: 8px; background: none; color: var(--mute); cursor: pointer; display: grid; place-items: center; }
+.ssn-eye:hover { background: var(--bg); color: var(--ink); }
+.ssn-eye[aria-pressed=true] { color: var(--teal-dark); }
+.consents { margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--rule); display: grid; gap: 22px; }
+.consent { display: grid; gap: 10px; }
+.cb { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.45; color: var(--ink); cursor: pointer; }
+.cb input { width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--teal); flex-shrink: 0; }
+.disc { margin: 0 0 0 30px; padding: 12px 14px; border-radius: 10px; background: var(--bg); font-size: 12.5px; line-height: 1.65; color: var(--ink-soft); }
+.err { margin: 14px 0 0; padding: 10px 12px; border-radius: 10px; background: var(--red-bg); color: var(--red); font-size: 13.5px; }
+.err[hidden] { display: none; }
+.actions { display: flex; align-items: center; justify-content: flex-end; margin-top: 28px; }
+.btn { height: 52px; padding: 0 26px; border: 0; border-radius: 12px; background: var(--teal); color: #fff; font: inherit; font-size: 16px; font-weight: 700; cursor: pointer; }
+.btn:hover { background: var(--teal-dark); }
+.btn:focus-visible, .back:focus-visible { outline: 3px solid rgba(11,122,117,.35); outline-offset: 2px; }
+.btn.next { min-width: 200px; }
+/* Back sits at the start of the progress row, away from the main button */
+.back { border: 0; background: none; font: inherit; font-size: 14px; font-weight: 600; color: var(--teal-dark); cursor: pointer; padding: 6px 2px; white-space: nowrap; }
+.back:hover { text-decoration: underline; }
+.back[hidden] { display: none; }
+.trust { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center; margin: 20px 0 0; font-size: 12.5px; color: var(--mute); }
+.trust span { display: inline-flex; align-items: center; gap: 6px; }
+.trust svg { color: var(--teal); }
+.done { text-align: center; padding: 10px 0; }
+.done .tick { width: 64px; height: 64px; border-radius: 50%; background: var(--teal); color: #fff; display: grid; place-items: center; margin: 0 auto 16px; }
+.done .tick svg { width: 30px; height: 30px; }
+.done ol { text-align: left; max-width: 420px; margin: 16px auto 0; padding-left: 20px; color: var(--ink-soft); line-height: 1.6; font-size: 14.5px; }
+.foot { max-width: 980px; margin: 0 auto; padding: 20px; font-size: 12px; line-height: 1.6; color: var(--mute); text-align: center; }
+.foot b { color: var(--ink-soft); }
+@media (max-width: 560px) {
+  .wrap { padding: 18px 14px 30px; } .card { padding: 22px 18px; border-radius: 14px; } h1 { font-size: 21px; }
+  .lede { margin-bottom: 22px; }
+  .grid2 { grid-template-columns: 1fr; gap: 22px; } .top-call span { display: none; }
+  .field { margin-bottom: 22px; } .grid2 { margin-bottom: 22px; }
+  /* the main button is centred */
+  .actions { justify-content: center; margin-top: 28px; }
+  .btn.next { width: 100%; max-width: 340px; min-width: 0; }
+  /* consents get room to breathe */
+  .consents { gap: 26px; margin-top: 26px; padding-top: 24px; }
+  .consent { gap: 12px; }
+  .cb { font-size: 14.5px; line-height: 1.5; gap: 12px; }
+  .disc { margin-left: 0; padding: 14px 15px; font-size: 13px; line-height: 1.7; }
+}
+</style>
 </head>
 <body>
+<!-- ATTESTIO TEST CASE. Clearwater Debt Solutions, LLC is a fictitious company. Fields are tagged per the Form Field
+     Annotation Guide v1.1: data-attestio-field on contact and consent fields, data-attestio-mask on date of birth and SSN. -->
+<header class="top"><div class="top-in">
+  <a class="brand" href="#" aria-label="Clearwater Debt Solutions"><span class="brand-mark" aria-hidden="true">≈</span>Clearwater Debt Solutions</a>
+  <div class="top-call"><span>Questions? Call a specialist</span><b>(800) 555-0142</b></div>
+</div></header>
+<main class="wrap">
+  <div class="progress" id="progress"><button type="button" class="back" id="back">← Back</button><div class="bar" aria-hidden="true"><i id="bar"></i></div><div class="pct" id="pct" aria-live="polite"></div></div>
   <div class="card">
-    <header>
-      <div class="brand">TurboDebt</div>
-      <div class="tagline">See if you qualify for debt relief — takes about 2 minutes. <strong>(Test fixture: MULTI-PAGE form — clicking Continue navigates to a new URL, /getting-started/submit. Tracker installed via Google Tag Manager only.)</strong></div>
-    </header>
-
-    <div style="margin:18px 0"><span class="ok-badge" id="trackingBadge">● Tracking active · Step 1 of 2</span></div>
-
-    <div class="progress"><span class="done"></span><span></span></div>
-
-    <!-- Step 1 is a REAL form: Continue submits with method=get to submit/, so the browser
-         navigates (the URL changes) and the step-1 answers travel to step 2 as query params. -->
-    <form id="gettingStartedForm" method="get" action="submit/">
-      <!-- Carried through the funnel so GTM's `qp - DebtOwed` trigger matches on every page.
-           Populated from this page's own ?DebtOwed= on load (removed if absent, so no blank key). -->
-      <input type="hidden" name="DebtOwed" id="qp_debtowed" />
-      <h2>What's your estimated debt balance?</h2>
-      <p class="hint">Include credit cards, medical bills, and personal loans.</p>
-      <div class="options" data-field="debt_amount">
-        <label class="option-btn"><input type="radio" name="debt_amount" value="lt_5k" required /> Under $5,000</label>
-        <label class="option-btn"><input type="radio" name="debt_amount" value="5k_10k" /> $5,000 - $10,000</label>
-        <label class="option-btn"><input type="radio" name="debt_amount" value="10k_25k" /> $10,000 - $25,000</label>
-        <label class="option-btn"><input type="radio" name="debt_amount" value="25k_50k" /> $25,000 - $50,000</label>
-        <label class="option-btn"><input type="radio" name="debt_amount" value="over_50k" /> $50,000+</label>
-      </div>
-
-      <h2 style="margin-top:26px">What type of debt do you have?</h2>
-      <p class="hint">Select the option that makes up most of your balance.</p>
-      <div class="options" data-field="debt_type">
-        <label class="option-btn"><input type="radio" name="debt_type" value="credit_cards" required /> Credit cards</label>
-        <label class="option-btn"><input type="radio" name="debt_type" value="medical_bills" /> Medical bills</label>
-        <label class="option-btn"><input type="radio" name="debt_type" value="personal_loans" /> Personal loans</label>
-        <label class="option-btn"><input type="radio" name="debt_type" value="other" /> Other</label>
-      </div>
-
-      <label class="fld" for="state">State</label>
-      <input id="state" name="state" data-attestio-field="state" type="text" autocomplete="address-level1" placeholder="e.g. FL" required />
-
-      <div class="nav-buttons">
-        <button type="submit" class="next">Continue</button>
-      </div>
+    <form id="cwForm" novalidate data-attestio-form="clearwater-getting-started">
+      <input type="hidden" name="attestio_record_id" id="attestio_record_id">
+      <section class="step" id="step-debt" data-step="0" aria-labelledby="h-debt">
+      <h1 id="h-debt" tabindex="-1">How much unsecured debt do you have?</h1>
+      <p class="lede">Credit cards, medical bills, personal loans and collections. Don’t include your mortgage or car loan.</p>
+      <div class="fields"><div class="field"><div class="choices" role="radiogroup"><label class="choice"><input type="radio" name="debt_amount" value="Under $10,000" required><span>Under $10,000</span><i><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></label><label class="choice"><input type="radio" name="debt_amount" value="$10,000 – $19,999"><span>$10,000 – $19,999</span><i><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></label><label class="choice"><input type="radio" name="debt_amount" value="$20,000 – $29,999"><span>$20,000 – $29,999</span><i><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></label><label class="choice"><input type="radio" name="debt_amount" value="$30,000 – $49,999"><span>$30,000 – $49,999</span><i><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></label><label class="choice"><input type="radio" name="debt_amount" value="$50,000 – $74,999"><span>$50,000 – $74,999</span><i><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></label><label class="choice"><input type="radio" name="debt_amount" value="$75,000 or more"><span>$75,000 or more</span><i><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></label></div></div></div>
+      <p class="err" role="alert" hidden></p>
+    </section><section class="step" id="step-behind" data-step="1" hidden aria-labelledby="h-behind">
+      <h1 id="h-behind" tabindex="-1">Are you behind on any payments?</h1>
+      <p class="lede">This helps us see which programs you may qualify for.</p>
+      <div class="fields"><div class="field"><div class="choices" role="radiogroup"><label class="choice"><input type="radio" name="payment_status" value="I’m current on all payments" required><span>I’m current on all payments</span><i><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></label><label class="choice"><input type="radio" name="payment_status" value="Behind 1 – 2 months"><span>Behind 1 – 2 months</span><i><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></label><label class="choice"><input type="radio" name="payment_status" value="Behind 3 months or more"><span>Behind 3 months or more</span><i><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></label><label class="choice"><input type="radio" name="payment_status" value="In collections"><span>In collections</span><i><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></label></div></div></div>
+      <p class="err" role="alert" hidden></p>
+    </section><section class="step" id="step-income" data-step="2" hidden aria-labelledby="h-income">
+      <h1 id="h-income" tabindex="-1">What’s your monthly household income?</h1>
+      <p class="lede">Before taxes. A rough estimate is fine.</p>
+      <div class="fields"><div class="field"><div class="choices" role="radiogroup"><label class="choice"><input type="radio" name="monthly_income" value="Under $2,000" required data-attestio-mask><span>Under $2,000</span><i><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></label><label class="choice"><input type="radio" name="monthly_income" value="$2,000 – $3,999" data-attestio-mask><span>$2,000 – $3,999</span><i><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></label><label class="choice"><input type="radio" name="monthly_income" value="$4,000 – $5,999" data-attestio-mask><span>$4,000 – $5,999</span><i><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></label><label class="choice"><input type="radio" name="monthly_income" value="$6,000 or more" data-attestio-mask><span>$6,000 or more</span><i><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i></label></div></div><div class="field"><label class="lbl" for="cw_emp">Employment status</label><select id="cw_emp" name="employment_status" required><option value="">Select…</option><option>Employed full time</option><option>Employed part time</option><option>Self-employed</option><option>Retired</option><option>Not currently employed</option></select></div></div>
+      <p class="err" role="alert" hidden></p>
+    </section><section class="step" id="step-where" data-step="3" hidden aria-labelledby="h-where">
+      <h1 id="h-where" tabindex="-1">Where do you live?</h1>
+      <p class="lede">Programs and fees vary by state.</p>
+      <div class="fields"><div class="grid2"><div class="field"><label class="lbl" for="cw_state">State</label><select id="cw_state" name="state" autocomplete="address-level1" required data-attestio-field="state"><option value="">Select…</option><option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option><option>CO</option><option>CT</option><option>DE</option><option>DC</option><option>FL</option><option>GA</option><option>HI</option><option>ID</option><option>IL</option><option>IN</option><option>IA</option><option>KS</option><option>KY</option><option>LA</option><option>ME</option><option>MD</option><option>MA</option><option>MI</option><option>MN</option><option>MS</option><option>MO</option><option>MT</option><option>NE</option><option>NV</option><option>NH</option><option>NJ</option><option>NM</option><option>NY</option><option>NC</option><option>ND</option><option>OH</option><option>OK</option><option>OR</option><option>PA</option><option>RI</option><option>SC</option><option>SD</option><option>TN</option><option>TX</option><option>UT</option><option>VT</option><option>VA</option><option>WA</option><option>WV</option><option>WI</option><option>WY</option></select></div><div class="field"><label class="lbl" for="cw_zip">ZIP code</label><input type="text" id="cw_zip" name="zip_code" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="\d{5}" required data-attestio-field="postal-code" placeholder="33131"></div></div></div>
+      <p class="err" role="alert" hidden></p>
+    </section><section class="step" id="step-about" data-step="4" hidden aria-labelledby="h-about">
+      <h1 id="h-about" tabindex="-1">Tell us about yourself</h1>
+      <p class="lede">Use your legal name, as it appears on your accounts.</p>
+      <div class="fields"><div class="grid2"><div class="field"><label class="lbl" for="cw_fn">First name</label><input type="text" id="cw_fn" name="first_name" autocomplete="given-name" required data-attestio-field="first-name"></div><div class="field"><label class="lbl" for="cw_ln">Last name</label><input type="text" id="cw_ln" name="last_name" autocomplete="family-name" required data-attestio-field="last-name"></div></div><div class="field"><label class="lbl" for="cw_dob">Date of birth</label><input type="text" id="cw_dob" name="date_of_birth" inputmode="numeric" autocomplete="bday" placeholder="MM/DD/YYYY" maxlength="10" required data-attestio-mask aria-describedby="cw_dob_hint"><p class="hint" id="cw_dob_hint">You must be 18 or older.</p></div></div>
+      <p class="err" role="alert" hidden></p>
+    </section><section class="step" id="step-contact" data-step="5" hidden aria-labelledby="h-contact">
+      <h1 id="h-contact" tabindex="-1">Where should we send your savings estimate?</h1>
+      <p class="lede">We’ll email your estimate and a specialist may call to walk you through it.</p>
+      <div class="fields"><div class="field"><label class="lbl" for="cw_em">Email</label><input type="email" id="cw_em" name="email" autocomplete="email" required data-attestio-field="email" placeholder="you@example.com"></div><div class="field"><label class="lbl" for="cw_ph">Mobile phone</label><input type="tel" id="cw_ph" name="phone" autocomplete="tel-national" inputmode="tel" required data-attestio-field="phone" placeholder="(305) 555-0148"></div></div>
+      <p class="err" role="alert" hidden></p>
+    </section><section class="step" id="step-verify" data-step="6" hidden aria-labelledby="h-verify">
+      <h1 id="h-verify" tabindex="-1">Verify your identity</h1>
+      <p class="lede">We use a soft credit check to match you with the right program. It does not affect your credit score.</p>
+      <div class="fields"><div class="field"><label class="lbl" for="cw_ssn">Social Security number</label><div class="ssn-wrap"><input type="password" id="cw_ssn" name="ssn" inputmode="numeric" autocomplete="off" placeholder="•••-••-••••" maxlength="11" required data-attestio-mask aria-describedby="cw_ssn_hint"><button type="button" class="ssn-eye" id="cw_ssn_eye" aria-label="Show Social Security number" aria-pressed="false"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M1.8 10S5 4.2 10 4.2 18.2 10 18.2 10 15 15.8 10 15.8 1.8 10 1.8 10z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button></div><p class="hint secure" id="cw_ssn_hint"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><rect x="4" y="9" width="12" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span>Encrypted and used only to verify your identity and check your credit with a soft inquiry.</span></p></div><div class="consents"><div class="consent"><label class="cb"><input type="checkbox" id="cw_tcpa" name="tcpa_consent" value="yes" required data-attestio-field="consent"><span>I agree to be contacted by Clearwater Debt Solutions, LLC as described below.</span></label><p class="disc" data-attestio-field="tcpa">By checking the box above and clicking “Get my free savings estimate”, I agree that Clearwater Debt Solutions, LLC may call and text me at the phone number I provided, including calls and texts made with automated technology and prerecorded or artificial voice messages, about debt relief programs. Consent is not a condition of any purchase. Message and data rates may apply. Message frequency varies. Reply STOP to opt out at any time. I also agree to the <a href="#privacy">Privacy Policy</a> and <a href="#terms">Terms of Use</a>.</p></div><div class="consent"><label class="cb"><input type="checkbox" id="cw_fcra" name="credit_authorization" value="yes" required><span>I authorize Clearwater Debt Solutions, LLC to obtain my credit report through a soft inquiry, which will not affect my credit score. This is my written instruction under the Fair Credit Reporting Act.</span></label></div></div></div>
+      <p class="err" role="alert" hidden></p>
+    </section>
+      <div class="actions"><button type="button" class="btn next" id="next">Continue</button></div>
     </form>
-
-    <!-- Two "forms" = the same funnel entered with each DebtOwed value; GTM fires Tag A vs Tag B. -->
-    <p style="margin-top:18px;font-size:12.5px;color:#667085">
-      Test entries —
-      <a href="?DebtOwed=15000"><strong>Form A</strong> · ?DebtOwed=15000</a> ·
-      <a href="?DebtOwed=25000"><strong>Form B</strong> · ?DebtOwed=25000</a>
-    </p>
+    <div class="done" id="cwDone" hidden>
+      <div class="tick"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h1>Thanks — your estimate is on its way</h1>
+      <p class="lede">We’ve emailed your free savings estimate. A Clearwater specialist will call you within one business day to walk you through your options.</p>
+      <ol><li>Check your inbox for your estimate.</li><li>Keep your phone nearby for our call.</li><li>There’s no obligation to enroll.</li></ol>
+    </div>
   </div>
-
-  <script>
-    // Propagate ?DebtOwed= into the Continue (GET) navigation. If it isn't present, drop the hidden
-    // field entirely so the next URL doesn't carry a blank DebtOwed= key.
-    (function () {
-      var v = new URLSearchParams(location.search).get('DebtOwed');
-      var h = document.getElementById('qp_debtowed');
-      if (v) { h.value = v; } else { h.remove(); }
-    })();
-  </script>
+  <div class="trust"><span><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><rect x="4" y="9" width="12" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>256-bit encryption</span><span><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No obligation</span><span><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M3.5 8.4l3 3 6-6.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Soft credit check only</span></div>
+</main>
+<footer class="foot">
+  <p><b>Clearwater Debt Solutions, LLC</b> · 1200 Brickell Ave, Suite 900, Miami, FL 33131 · <a href="#privacy">Privacy Policy</a> · <a href="#terms">Terms of Use</a></p>
+  <p>Debt relief programs are not available in all states. Results vary. Not all debts are eligible. Enrolling in a program may affect your credit. Clearwater does not assume debts or provide tax, legal or bankruptcy advice.</p>
+  <p><b>Test case:</b> Clearwater Debt Solutions is a fictitious company used for Attestio testing. Phone numbers and addresses are not real.</p>
+</footer>
+<script>
+(function () {
+  'use strict';
+  var $ = function (s, r) { return (r || document).querySelector(s); }, steps = [].slice.call(document.querySelectorAll('.step')), cur = 0, N = steps.length;
+  var bar = $('#bar'), pct = $('#pct'), next = $('#next'), back = $('#back');
+  function paint() {
+    steps.forEach(function (s, i) { s.hidden = i !== cur; });
+    bar.style.width = Math.round((cur + 1) / N * 100) + '%';
+    pct.textContent = 'Step ' + (cur + 1) + ' of ' + N;
+    back.hidden = cur === 0;
+    next.textContent = cur === N - 1 ? 'Get my free savings estimate' : 'Continue';
+    var h = steps[cur].querySelector('h1'); if (h) h.focus({ preventScroll: true });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function err(step, msg) { var e = step.querySelector('.err'); e.textContent = msg || ''; e.hidden = !msg; }
+  function age(v) { var m = v.match(/^(\d{2})\/(\d{2})\/(\d{4})$/); if (!m) return -1; var d = new Date(+m[3], +m[1] - 1, +m[2]); if (d.getMonth() !== +m[1] - 1 || d.getDate() !== +m[2]) return -1; var n = new Date(), a = n.getFullYear() - d.getFullYear(); if (n < new Date(n.getFullYear(), d.getMonth(), d.getDate())) a--; return a; }
+  function check(step) {
+    var bad = null;
+    [].forEach.call(step.querySelectorAll('.bad'), function (x) { x.classList.remove('bad'); });
+    var radios = {}; [].forEach.call(step.querySelectorAll('input[type=radio]'), function (r) { radios[r.name] = radios[r.name] || !!step.querySelector('input[name="' + r.name + '"]:checked'); });
+    for (var n in radios) if (!radios[n]) return 'Choose one of the options to continue.';
+    var fields = step.querySelectorAll('input[required]:not([type=radio]):not([type=checkbox]), select[required]');
+    for (var i = 0; i < fields.length; i++) {
+      var f = fields[i], v = f.value.trim(), msg = '';
+      if (!v) msg = 'Please fill in every field.';
+      else if (f.name === 'zip_code' && !/^\d{5}$/.test(v)) msg = 'Enter a 5-digit ZIP code.';
+      else if (f.name === 'date_of_birth') { var a = age(v); msg = a < 0 ? 'Enter your date of birth as MM/DD/YYYY.' : a < 18 ? 'You must be 18 or older to apply.' : a > 110 ? 'Check the year of your date of birth.' : ''; }
+      else if (f.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) msg = 'Enter a valid email address.';
+      else if (f.name === 'phone' && v.replace(/\D/g, '').length !== 10) msg = 'Enter a 10-digit US phone number.';
+      else if (f.name === 'ssn' && !/^\d{3}-\d{2}-\d{4}$/.test(v)) msg = 'Enter your 9-digit Social Security number.';
+      if (msg) { f.classList.add('bad'); if (!bad) { bad = msg; f.focus(); } }
+    }
+    if (bad) return bad;
+    var boxes = step.querySelectorAll('input[type=checkbox][required]');
+    for (var j = 0; j < boxes.length; j++) if (!boxes[j].checked) { boxes[j].focus(); return boxes[j].id === 'cw_fcra' ? 'Please authorize the soft credit check to continue.' : 'Please agree to be contacted to get your estimate.'; }
+    return '';
+  }
+  next.addEventListener('click', function () {
+    var step = steps[cur], msg = check(step); err(step, msg); if (msg) return;
+    if (cur < N - 1) { cur++; paint(); return; }
+    next.disabled = true; next.textContent = 'Submitting\u2026';
+    var form = document.getElementById('cwForm');
+    if (typeof form.requestSubmit === 'function') form.requestSubmit();
+    else form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+  });
+  back.addEventListener('click', function () { if (cur > 0) { cur--; paint(); } });
+  /* choices advance on their own: one tap, next question */
+  [].forEach.call(document.querySelectorAll('.choice input'), function (r) {
+    r.addEventListener('change', function () { var step = steps[cur]; err(step, ''); if (step.querySelectorAll('select[required], input[required]:not([type=radio])').length === 0) setTimeout(function () { next.click(); }, 180); });
+  });
+  /* formatting as people type */
+  var dob = $('#cw_dob'); dob.addEventListener('input', function () { var d = dob.value.replace(/\D/g, '').slice(0, 8); dob.value = d.length > 4 ? d.slice(0, 2) + '/' + d.slice(2, 4) + '/' + d.slice(4) : d.length > 2 ? d.slice(0, 2) + '/' + d.slice(2) : d; });
+  var ph = $('#cw_ph'); ph.addEventListener('input', function () { var d = ph.value.replace(/\D/g, '').replace(/^1/, '').slice(0, 10); ph.value = d.length > 6 ? '(' + d.slice(0, 3) + ') ' + d.slice(3, 6) + '-' + d.slice(6) : d.length > 3 ? '(' + d.slice(0, 3) + ') ' + d.slice(3) : d; });
+  var ssn = $('#cw_ssn'); ssn.addEventListener('input', function () { var d = ssn.value.replace(/\D/g, '').slice(0, 9); ssn.value = d.length > 5 ? d.slice(0, 3) + '-' + d.slice(3, 5) + '-' + d.slice(5) : d.length > 3 ? d.slice(0, 3) + '-' + d.slice(3) : d; });
+  var zip = $('#cw_zip'); zip.addEventListener('input', function () { zip.value = zip.value.replace(/\D/g, '').slice(0, 5); });
+  var eye = $('#cw_ssn_eye'); eye.addEventListener('click', function () { var show = ssn.type === 'password'; ssn.type = show ? 'text' : 'password'; eye.setAttribute('aria-pressed', String(show)); eye.setAttribute('aria-label', (show ? 'Hide' : 'Show') + ' Social Security number'); });
+  document.getElementById('cwForm').addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.tagName !== 'BUTTON' && e.target.tagName !== 'A') { e.preventDefault(); next.click(); } });
+  /* The submit: one native submit event (what Attestio's snippet listens for), the lead announced to the page
+     (zippy:lead, as on every ZippyBK form; the SSN is left out), then the thank-you screen. */
+  var submitted = false;
+  document.getElementById('cwForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (submitted) return;
+    submitted = true;
+    var payload = {};
+    new FormData(e.target).forEach(function (v, k) { if (k !== 'ssn') payload[k] = payload[k] ? payload[k] + '|' + v : v; });
+    try { window.dispatchEvent(new CustomEvent('zippy:lead', { detail: payload })); } catch (err) {}
+    setTimeout(function () { document.getElementById('cwForm').hidden = true; document.getElementById('cwDone').hidden = false; $('#progress').hidden = true; window.scrollTo(0, 0); }, 700);
+  });
+  paint();
+})();
+</script>
 </body>
 </html>
